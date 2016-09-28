@@ -28,7 +28,12 @@ namespace DruidPushApp
 
 			MySetVariable();
 		}
-		
+
+		private void radioButton_Click(object sender, EventArgs e)
+		{
+			MySelect();
+		}
+
 		private void button_OK_Click(object sender, EventArgs e)
 		{
 			oldCount = this.MyGetCount();
@@ -41,8 +46,10 @@ namespace DruidPushApp
 			notifyIcon.BalloonTipTitle = "DruidPushApp";
 			notifyIcon.BalloonTipText = "백그라운드에서 실행 중 입니다.";
 			notifyIcon.ShowBalloonTip(3000);
-			
-			thread_parse.Start();		// HTML 소스 파싱 스레드 실행
+
+			// HTML 소스 파싱 스레드 생성 및 실행
+			thread_parse = new Thread(new ThreadStart(MyParse));
+			thread_parse.Start();
 		}
 
 		private void button_Cancel_Click(object sender, EventArgs e)
@@ -67,8 +74,6 @@ namespace DruidPushApp
 		/* 변수 초기화 함수 */
 		public void MySetVariable()
 		{
-			thread_parse = new Thread(new ThreadStart(MyParse));
-
 			URL = "";
 
 			oldCount = 0;
@@ -81,12 +86,46 @@ namespace DruidPushApp
 			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
 			HtmlAgilityPack.HtmlNode htmlNode;
 
-			URL = this.textBox_URL.Text;
-
 			htmlDocument = htmlWeb.Load(URL);
 			htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr//th").First();
 
 			return Convert.ToInt32(htmlNode.InnerHtml);
+		}
+
+		public void MySelect()
+		{
+			if (radioButton_Advanced.Checked == true)
+			{
+				radioButton_Discrete.Checked = false;
+				radioButton_Datastructure.Checked = false;
+				radioButton_Algorithm.Checked = false;
+
+				URL = "http://druid.kw.ac.kr/Board/Contents/Advanced";
+			}
+			else if (radioButton_Discrete.Checked == true)
+			{
+				radioButton_Advanced.Checked = false;
+				radioButton_Datastructure.Checked = false;
+				radioButton_Algorithm.Checked = false;
+
+				URL = "http://druid.kw.ac.kr/Board/Contents/Discrete";
+			}
+			else if (radioButton_Datastructure.Checked == true)
+			{
+				radioButton_Advanced.Checked = false;
+				radioButton_Discrete.Checked = false;
+				radioButton_Algorithm.Checked = false;
+
+				URL = "http://druid.kw.ac.kr/Board/Contents/Datastructure";
+			}
+			else if (radioButton_Algorithm.Checked == true)
+			{
+				radioButton_Advanced.Checked = false;
+				radioButton_Discrete.Checked = false;
+				radioButton_Datastructure.Checked = false;
+
+				URL = "http://druid.kw.ac.kr/Board/Contents/Algorithm";
+			}
 		}
 
 		/* HTML 소스 파싱 함수 */

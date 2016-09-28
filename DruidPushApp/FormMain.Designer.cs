@@ -33,11 +33,15 @@
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.ToolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
-			this.textBox_URL = new System.Windows.Forms.TextBox();
-			this.label_URL = new System.Windows.Forms.Label();
 			this.button_OK = new System.Windows.Forms.Button();
 			this.button_Cancel = new System.Windows.Forms.Button();
+			this.groupBox_URL = new System.Windows.Forms.GroupBox();
+			this.radioButton_Advanced = new System.Windows.Forms.RadioButton();
+			this.radioButton_Discrete = new System.Windows.Forms.RadioButton();
+			this.radioButton_Datastructure = new System.Windows.Forms.RadioButton();
+			this.radioButton_Algorithm = new System.Windows.Forms.RadioButton();
 			this.contextMenuStrip.SuspendLayout();
+			this.groupBox_URL.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// notifyIcon
@@ -63,29 +67,12 @@
 			this.ToolStripMenuItem_Exit.Text = "종료";
 			this.ToolStripMenuItem_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_Exit_Click);
 			// 
-			// textBox_URL
-			// 
-			this.textBox_URL.Font = new System.Drawing.Font("맑은 고딕", 10F);
-			this.textBox_URL.Location = new System.Drawing.Point(12, 49);
-			this.textBox_URL.Name = "textBox_URL";
-			this.textBox_URL.Size = new System.Drawing.Size(700, 43);
-			this.textBox_URL.TabIndex = 2;
-			// 
-			// label_URL
-			// 
-			this.label_URL.AutoSize = true;
-			this.label_URL.Font = new System.Drawing.Font("맑은 고딕", 10F);
-			this.label_URL.Location = new System.Drawing.Point(12, 9);
-			this.label_URL.Name = "label_URL";
-			this.label_URL.Size = new System.Drawing.Size(80, 37);
-			this.label_URL.TabIndex = 3;
-			this.label_URL.Text = "URL :";
-			// 
 			// button_OK
 			// 
-			this.button_OK.Location = new System.Drawing.Point(457, 111);
+			this.button_OK.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.button_OK.Location = new System.Drawing.Point(0, 217);
 			this.button_OK.Name = "button_OK";
-			this.button_OK.Size = new System.Drawing.Size(117, 56);
+			this.button_OK.Size = new System.Drawing.Size(774, 56);
 			this.button_OK.TabIndex = 4;
 			this.button_OK.Text = "확인";
 			this.button_OK.UseVisualStyleBackColor = true;
@@ -93,32 +80,104 @@
 			// 
 			// button_Cancel
 			// 
-			this.button_Cancel.Location = new System.Drawing.Point(595, 111);
+			this.button_Cancel.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.button_Cancel.Location = new System.Drawing.Point(0, 273);
 			this.button_Cancel.Name = "button_Cancel";
-			this.button_Cancel.Size = new System.Drawing.Size(117, 56);
+			this.button_Cancel.Size = new System.Drawing.Size(774, 56);
 			this.button_Cancel.TabIndex = 5;
 			this.button_Cancel.Text = "종료";
 			this.button_Cancel.UseVisualStyleBackColor = true;
 			this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
 			// 
+			// groupBox_URL
+			// 
+			this.groupBox_URL.Controls.Add(this.radioButton_Algorithm);
+			this.groupBox_URL.Controls.Add(this.radioButton_Datastructure);
+			this.groupBox_URL.Controls.Add(this.radioButton_Discrete);
+			this.groupBox_URL.Controls.Add(this.radioButton_Advanced);
+			this.groupBox_URL.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox_URL.Location = new System.Drawing.Point(0, 0);
+			this.groupBox_URL.Name = "groupBox_URL";
+			this.groupBox_URL.Padding = new System.Windows.Forms.Padding(12);
+			this.groupBox_URL.Size = new System.Drawing.Size(774, 217);
+			this.groupBox_URL.TabIndex = 6;
+			this.groupBox_URL.TabStop = false;
+			this.groupBox_URL.Text = "URL";
+			// 
+			// radioButton_Advanced
+			// 
+			this.radioButton_Advanced.AutoSize = true;
+			this.radioButton_Advanced.Dock = System.Windows.Forms.DockStyle.Top;
+			this.radioButton_Advanced.Location = new System.Drawing.Point(12, 44);
+			this.radioButton_Advanced.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Advanced.Name = "radioButton_Advanced";
+			this.radioButton_Advanced.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Advanced.TabIndex = 0;
+			this.radioButton_Advanced.TabStop = true;
+			this.radioButton_Advanced.Text = "고급프로그래밍";
+			this.radioButton_Advanced.UseVisualStyleBackColor = true;
+			this.radioButton_Advanced.Click += new System.EventHandler(this.radioButton_Click);
+			// 
+			// radioButton_Discrete
+			// 
+			this.radioButton_Discrete.AutoSize = true;
+			this.radioButton_Discrete.Dock = System.Windows.Forms.DockStyle.Top;
+			this.radioButton_Discrete.Location = new System.Drawing.Point(12, 80);
+			this.radioButton_Discrete.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Discrete.Name = "radioButton_Discrete";
+			this.radioButton_Discrete.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Discrete.TabIndex = 1;
+			this.radioButton_Discrete.TabStop = true;
+			this.radioButton_Discrete.Text = "이산구조";
+			this.radioButton_Discrete.UseVisualStyleBackColor = true;
+			this.radioButton_Discrete.Click += new System.EventHandler(this.radioButton_Click);
+			// 
+			// radioButton_Datastructure
+			// 
+			this.radioButton_Datastructure.AutoSize = true;
+			this.radioButton_Datastructure.Dock = System.Windows.Forms.DockStyle.Top;
+			this.radioButton_Datastructure.Location = new System.Drawing.Point(12, 116);
+			this.radioButton_Datastructure.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Datastructure.Name = "radioButton_Datastructure";
+			this.radioButton_Datastructure.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Datastructure.TabIndex = 2;
+			this.radioButton_Datastructure.TabStop = true;
+			this.radioButton_Datastructure.Text = "자료구조";
+			this.radioButton_Datastructure.UseVisualStyleBackColor = true;
+			this.radioButton_Datastructure.Click += new System.EventHandler(this.radioButton_Click);
+			// 
+			// radioButton_Algorithm
+			// 
+			this.radioButton_Algorithm.AutoSize = true;
+			this.radioButton_Algorithm.Dock = System.Windows.Forms.DockStyle.Top;
+			this.radioButton_Algorithm.Location = new System.Drawing.Point(12, 152);
+			this.radioButton_Algorithm.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Algorithm.Name = "radioButton_Algorithm";
+			this.radioButton_Algorithm.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Algorithm.TabIndex = 3;
+			this.radioButton_Algorithm.TabStop = true;
+			this.radioButton_Algorithm.Text = "알고리즘";
+			this.radioButton_Algorithm.UseVisualStyleBackColor = true;
+			this.radioButton_Algorithm.Click += new System.EventHandler(this.radioButton_Click);
+			// 
 			// Form
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(724, 179);
-			this.Controls.Add(this.button_Cancel);
+			this.ClientSize = new System.Drawing.Size(774, 329);
+			this.Controls.Add(this.groupBox_URL);
 			this.Controls.Add(this.button_OK);
-			this.Controls.Add(this.label_URL);
-			this.Controls.Add(this.textBox_URL);
-			this.Font = new System.Drawing.Font("맑은 고딕", 10F);
+			this.Controls.Add(this.button_Cancel);
+			this.Font = new System.Drawing.Font("맑은 고딕", 9F);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Form";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "DruidPushApp";
 			this.contextMenuStrip.ResumeLayout(false);
+			this.groupBox_URL.ResumeLayout(false);
+			this.groupBox_URL.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -127,10 +186,13 @@
 		private System.Windows.Forms.NotifyIcon notifyIcon;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Exit;
-		private System.Windows.Forms.TextBox textBox_URL;
-		private System.Windows.Forms.Label label_URL;
 		private System.Windows.Forms.Button button_OK;
 		private System.Windows.Forms.Button button_Cancel;
+		private System.Windows.Forms.GroupBox groupBox_URL;
+		private System.Windows.Forms.RadioButton radioButton_Algorithm;
+		private System.Windows.Forms.RadioButton radioButton_Datastructure;
+		private System.Windows.Forms.RadioButton radioButton_Discrete;
+		private System.Windows.Forms.RadioButton radioButton_Advanced;
 	}
 }
 
