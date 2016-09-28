@@ -36,10 +36,10 @@
 			this.button_OK = new System.Windows.Forms.Button();
 			this.button_Cancel = new System.Windows.Forms.Button();
 			this.groupBox_URL = new System.Windows.Forms.GroupBox();
-			this.radioButton_Advanced = new System.Windows.Forms.RadioButton();
-			this.radioButton_Discrete = new System.Windows.Forms.RadioButton();
-			this.radioButton_Datastructure = new System.Windows.Forms.RadioButton();
 			this.radioButton_Algorithm = new System.Windows.Forms.RadioButton();
+			this.radioButton_Datastructure = new System.Windows.Forms.RadioButton();
+			this.radioButton_Discrete = new System.Windows.Forms.RadioButton();
+			this.radioButton_Advanced = new System.Windows.Forms.RadioButton();
 			this.contextMenuStrip.SuspendLayout();
 			this.groupBox_URL.SuspendLayout();
 			this.SuspendLayout();
@@ -102,49 +102,7 @@
 			this.groupBox_URL.Size = new System.Drawing.Size(774, 217);
 			this.groupBox_URL.TabIndex = 6;
 			this.groupBox_URL.TabStop = false;
-			this.groupBox_URL.Text = "URL";
-			// 
-			// radioButton_Advanced
-			// 
-			this.radioButton_Advanced.AutoSize = true;
-			this.radioButton_Advanced.Dock = System.Windows.Forms.DockStyle.Top;
-			this.radioButton_Advanced.Location = new System.Drawing.Point(12, 44);
-			this.radioButton_Advanced.Margin = new System.Windows.Forms.Padding(6);
-			this.radioButton_Advanced.Name = "radioButton_Advanced";
-			this.radioButton_Advanced.Size = new System.Drawing.Size(750, 36);
-			this.radioButton_Advanced.TabIndex = 0;
-			this.radioButton_Advanced.TabStop = true;
-			this.radioButton_Advanced.Text = "고급프로그래밍";
-			this.radioButton_Advanced.UseVisualStyleBackColor = true;
-			this.radioButton_Advanced.Click += new System.EventHandler(this.radioButton_Click);
-			// 
-			// radioButton_Discrete
-			// 
-			this.radioButton_Discrete.AutoSize = true;
-			this.radioButton_Discrete.Dock = System.Windows.Forms.DockStyle.Top;
-			this.radioButton_Discrete.Location = new System.Drawing.Point(12, 80);
-			this.radioButton_Discrete.Margin = new System.Windows.Forms.Padding(6);
-			this.radioButton_Discrete.Name = "radioButton_Discrete";
-			this.radioButton_Discrete.Size = new System.Drawing.Size(750, 36);
-			this.radioButton_Discrete.TabIndex = 1;
-			this.radioButton_Discrete.TabStop = true;
-			this.radioButton_Discrete.Text = "이산구조";
-			this.radioButton_Discrete.UseVisualStyleBackColor = true;
-			this.radioButton_Discrete.Click += new System.EventHandler(this.radioButton_Click);
-			// 
-			// radioButton_Datastructure
-			// 
-			this.radioButton_Datastructure.AutoSize = true;
-			this.radioButton_Datastructure.Dock = System.Windows.Forms.DockStyle.Top;
-			this.radioButton_Datastructure.Location = new System.Drawing.Point(12, 116);
-			this.radioButton_Datastructure.Margin = new System.Windows.Forms.Padding(6);
-			this.radioButton_Datastructure.Name = "radioButton_Datastructure";
-			this.radioButton_Datastructure.Size = new System.Drawing.Size(750, 36);
-			this.radioButton_Datastructure.TabIndex = 2;
-			this.radioButton_Datastructure.TabStop = true;
-			this.radioButton_Datastructure.Text = "자료구조";
-			this.radioButton_Datastructure.UseVisualStyleBackColor = true;
-			this.radioButton_Datastructure.Click += new System.EventHandler(this.radioButton_Click);
+			this.groupBox_URL.Text = "과목";
 			// 
 			// radioButton_Algorithm
 			// 
@@ -160,6 +118,48 @@
 			this.radioButton_Algorithm.UseVisualStyleBackColor = true;
 			this.radioButton_Algorithm.Click += new System.EventHandler(this.radioButton_Click);
 			// 
+			// radioButton_Datastructure
+			// 
+			this.radioButton_Datastructure.AutoSize = true;
+			this.radioButton_Datastructure.Dock = System.Windows.Forms.DockStyle.Top;
+			this.radioButton_Datastructure.Location = new System.Drawing.Point(12, 116);
+			this.radioButton_Datastructure.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Datastructure.Name = "radioButton_Datastructure";
+			this.radioButton_Datastructure.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Datastructure.TabIndex = 2;
+			this.radioButton_Datastructure.TabStop = true;
+			this.radioButton_Datastructure.Text = "자료구조";
+			this.radioButton_Datastructure.UseVisualStyleBackColor = true;
+			this.radioButton_Datastructure.Click += new System.EventHandler(this.radioButton_Click);
+			// 
+			// radioButton_Discrete
+			// 
+			this.radioButton_Discrete.AutoSize = true;
+			this.radioButton_Discrete.Dock = System.Windows.Forms.DockStyle.Top;
+			this.radioButton_Discrete.Location = new System.Drawing.Point(12, 80);
+			this.radioButton_Discrete.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Discrete.Name = "radioButton_Discrete";
+			this.radioButton_Discrete.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Discrete.TabIndex = 1;
+			this.radioButton_Discrete.TabStop = true;
+			this.radioButton_Discrete.Text = "이산구조";
+			this.radioButton_Discrete.UseVisualStyleBackColor = true;
+			this.radioButton_Discrete.Click += new System.EventHandler(this.radioButton_Click);
+			// 
+			// radioButton_Advanced
+			// 
+			this.radioButton_Advanced.AutoSize = true;
+			this.radioButton_Advanced.Dock = System.Windows.Forms.DockStyle.Top;
+			this.radioButton_Advanced.Location = new System.Drawing.Point(12, 44);
+			this.radioButton_Advanced.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Advanced.Name = "radioButton_Advanced";
+			this.radioButton_Advanced.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Advanced.TabIndex = 0;
+			this.radioButton_Advanced.TabStop = true;
+			this.radioButton_Advanced.Text = "고급프로그래밍";
+			this.radioButton_Advanced.UseVisualStyleBackColor = true;
+			this.radioButton_Advanced.Click += new System.EventHandler(this.radioButton_Click);
+			// 
 			// Form
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -174,6 +174,7 @@
 			this.Name = "Form";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "DruidPushApp";
+			this.TopMost = true;
 			this.contextMenuStrip.ResumeLayout(false);
 			this.groupBox_URL.ResumeLayout(false);
 			this.groupBox_URL.PerformLayout();

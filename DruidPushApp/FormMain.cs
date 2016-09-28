@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using HtmlAgilityPack;
 
 namespace DruidPushApp
 {
@@ -45,7 +37,7 @@ namespace DruidPushApp
 			// 알림 표시
 			notifyIcon.BalloonTipTitle = "DruidPushApp";
 			notifyIcon.BalloonTipText = "백그라운드에서 실행 중 입니다.";
-			notifyIcon.ShowBalloonTip(3000);
+			notifyIcon.ShowBalloonTip(1000);
 
 			// HTML 소스 파싱 스레드 생성 및 실행
 			thread_parse = new Thread(new ThreadStart(MyParse));
@@ -161,7 +153,7 @@ namespace DruidPushApp
 		{
 			notifyIcon.BalloonTipTitle = "새 질문이 등록되었습니다.";
 			notifyIcon.BalloonTipText = "작성자 : " + username + "\n" + "제목 : " + title;
-			notifyIcon.ShowBalloonTip(5000);
+			notifyIcon.ShowBalloonTip(3000);
 		}
 	}
 }
