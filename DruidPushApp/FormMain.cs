@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 
 namespace DruidPushApp
 {
@@ -28,11 +29,11 @@ namespace DruidPushApp
 
 		private void button_OK_Click(object sender, EventArgs e)
 		{
-			oldCount = this.MyGetCount();
+			oldCount = MyGetCount();
 
-			this.Visible = false;
-			this.ShowInTaskbar = false;
-			this.WindowState = FormWindowState.Minimized;
+			Visible = false;
+			ShowInTaskbar = false;
+			WindowState = FormWindowState.Minimized;
 
 			// 알림 표시
 			notifyIcon.BalloonTipTitle = "DruidPushApp";
@@ -58,9 +59,9 @@ namespace DruidPushApp
 		{
 			thread_parse.Abort();
 
-			this.Visible = true;
-			this.ShowInTaskbar = true;
-			this.WindowState = FormWindowState.Normal;
+			Visible = true;
+			ShowInTaskbar = true;
+			WindowState = FormWindowState.Normal;
 		}
 
 		/* 변수 초기화 함수 */
