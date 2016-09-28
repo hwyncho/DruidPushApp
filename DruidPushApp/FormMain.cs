@@ -15,12 +15,12 @@ namespace DruidPushApp
 {
 	public partial class Form : System.Windows.Forms.Form
 	{
-		Thread thread;
+		private Thread thread_parse;
+		
+		private String URL;         // 입력한 URL을 저장
 
-		String URL;			// 입력한 URL을 저장
-
-		int oldCount;		// 이전 게시물 갯수 저장
-		int newCount;		// 새 게시물 갯수 저장
+		private int oldCount;		// 이전 게시물 갯수 저장
+		private int newCount;		// 새 게시물 갯수 저장
 
 		public Form()
 		{
@@ -31,27 +31,18 @@ namespace DruidPushApp
 		
 		private void button_OK_Click(object sender, EventArgs e)
 		{
-			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
-			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
-			HtmlAgilityPack.HtmlNode htmlNode;
-
-			URL = this.textBox_URL.Text;
-
-			htmlDocument = htmlWeb.Load(URL);
-			htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr//th").First();
-
-			oldCount = Convert.ToInt32(htmlNode.InnerHtml);
+			oldCount = this.MyGetCount();
 
 			this.Visible = false;
 			this.ShowInTaskbar = false;
 			this.WindowState = FormWindowState.Minimized;
 
 			// 알림 표시
+			notifyIcon.BalloonTipTitle = "DruidPushApp";
 			notifyIcon.BalloonTipText = "백그라운드에서 실행 중 입니다.";
 			notifyIcon.ShowBalloonTip(3000);
-
-			// 스레드 실행
-			thread.Start();
+			
+			thread_parse.Start();		// HTML 소스 파싱 스레드 실행
 		}
 
 		private void button_Cancel_Click(object sender, EventArgs e)
@@ -66,7 +57,7 @@ namespace DruidPushApp
 
 		private void ToolStripMenuItem_Exit_Click(object sender, EventArgs e)
 		{
-			thread.Abort();
+			thread_parse.Abort();
 
 			this.Visible = true;
 			this.ShowInTaskbar = true;
@@ -76,15 +67,30 @@ namespace DruidPushApp
 		/* 변수 초기화 함수 */
 		public void MySetVariable()
 		{
-			thread = new Thread(new ThreadStart(MyParser));
+			thread_parse = new Thread(new ThreadStart(MyParse));
 
 			URL = "";
+
 			oldCount = 0;
 			newCount = 0;
 		}
 
+		private int MyGetCount()
+		{
+			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
+			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
+			HtmlAgilityPack.HtmlNode htmlNode;
+
+			URL = this.textBox_URL.Text;
+
+			htmlDocument = htmlWeb.Load(URL);
+			htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr//th").First();
+
+			return Convert.ToInt32(htmlNode.InnerHtml);
+		}
+
 		/* HTML 소스 파싱 함수 */
-		public void MyParser()
+		public void MyParse()
 		{
 			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
 			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
@@ -105,16 +111,17 @@ namespace DruidPushApp
 
 				if (newCount > oldCount)
 				{
-					MyPushNotify(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml);
+					new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
 					oldCount = newCount;
 				}
 			}
 		}
 
 		/* 알림 표시 함수 */
-		public void MyPushNotify(String writer, String title)
+		public void MyPush(String username, String title)
 		{
-			notifyIcon.BalloonTipText = "새 질문이 등록되었습니다.\n" + "작성자 : " + writer + "\n" + "제목 : " + title;
+			notifyIcon.BalloonTipTitle = "새 질문이 등록되었습니다.";
+			notifyIcon.BalloonTipText = "작성자 : " + username + "\n" + "제목 : " + title;
 			notifyIcon.ShowBalloonTip(5000);
 		}
 	}

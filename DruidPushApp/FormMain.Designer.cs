@@ -44,7 +44,7 @@
 			// 
 			this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
 			this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-			this.notifyIcon.Text = "notifyIcon";
+			this.notifyIcon.Text = "DruidPushApp";
 			this.notifyIcon.Visible = true;
 			this.notifyIcon.BalloonTipClicked += new System.EventHandler(this.notifyIcon_BalloonTipClicked);
 			// 
@@ -54,12 +54,12 @@
 			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_Exit});
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(270, 86);
+			this.contextMenuStrip.Size = new System.Drawing.Size(164, 42);
 			// 
 			// ToolStripMenuItem_Exit
 			// 
 			this.ToolStripMenuItem_Exit.Name = "ToolStripMenuItem_Exit";
-			this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(269, 38);
+			this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(163, 38);
 			this.ToolStripMenuItem_Exit.Text = "종료";
 			this.ToolStripMenuItem_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_Exit_Click);
 			// 
