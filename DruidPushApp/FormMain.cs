@@ -14,7 +14,7 @@ namespace DruidPushApp
 		private String URL;         // 입력한 URL을 저장
 
 		private int oldCount;		// 이전 게시물 갯수 저장
-		private int newCount;		// 새 게시물 갯수 저장
+		private int newCount;       // 새 게시물 갯수 저장
 
 		public FormMain()
 		{
@@ -52,11 +52,6 @@ namespace DruidPushApp
 		private void button_Cancel_Click(object sender, EventArgs e)
 		{
 			Close();
-		}
-
-		private void notifyIcon_BalloonTipClicked(object sender, EventArgs e)
-		{
-			System.Diagnostics.Process.Start(URL);
 		}
 
 		private void ToolStripMenuItem_Exit_Click(object sender, EventArgs e)

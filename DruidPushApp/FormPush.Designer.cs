@@ -120,7 +120,9 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "새 글이 등록되었습니다.";
 			this.TopMost = true;
+			this.Load += new System.EventHandler(this.FormPush_Load);
 			this.Shown += new System.EventHandler(this.FormPush_Shown);
+			this.Click += new System.EventHandler(this.FormPush_Click);
 			this.tableLayoutPanel_View.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox_Icon)).EndInit();
 			this.ResumeLayout(false);
