@@ -1,6 +1,6 @@
 ﻿namespace DruidPushApp
 {
-	partial class Form
+	partial class FormMain
 	{
 		/// <summary>
 		/// 필수 디자이너 변수입니다.
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.ToolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,9 +70,10 @@
 			// button_OK
 			// 
 			this.button_OK.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.button_OK.Location = new System.Drawing.Point(0, 217);
+			this.button_OK.Location = new System.Drawing.Point(3, 218);
 			this.button_OK.Name = "button_OK";
-			this.button_OK.Size = new System.Drawing.Size(774, 56);
+			this.button_OK.Padding = new System.Windows.Forms.Padding(3);
+			this.button_OK.Size = new System.Drawing.Size(768, 56);
 			this.button_OK.TabIndex = 4;
 			this.button_OK.Text = "확인";
 			this.button_OK.UseVisualStyleBackColor = true;
@@ -81,9 +82,10 @@
 			// button_Cancel
 			// 
 			this.button_Cancel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.button_Cancel.Location = new System.Drawing.Point(0, 273);
+			this.button_Cancel.Location = new System.Drawing.Point(3, 274);
 			this.button_Cancel.Name = "button_Cancel";
-			this.button_Cancel.Size = new System.Drawing.Size(774, 56);
+			this.button_Cancel.Padding = new System.Windows.Forms.Padding(3);
+			this.button_Cancel.Size = new System.Drawing.Size(768, 52);
 			this.button_Cancel.TabIndex = 5;
 			this.button_Cancel.Text = "종료";
 			this.button_Cancel.UseVisualStyleBackColor = true;
@@ -95,23 +97,21 @@
 			this.groupBox_URL.Controls.Add(this.radioButton_Datastructure);
 			this.groupBox_URL.Controls.Add(this.radioButton_Discrete);
 			this.groupBox_URL.Controls.Add(this.radioButton_Advanced);
-			this.groupBox_URL.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBox_URL.Location = new System.Drawing.Point(0, 0);
+			this.groupBox_URL.Dock = System.Windows.Forms.DockStyle.Top;
+			this.groupBox_URL.Location = new System.Drawing.Point(3, 3);
 			this.groupBox_URL.Name = "groupBox_URL";
-			this.groupBox_URL.Padding = new System.Windows.Forms.Padding(12);
-			this.groupBox_URL.Size = new System.Drawing.Size(774, 217);
+			this.groupBox_URL.Size = new System.Drawing.Size(768, 209);
 			this.groupBox_URL.TabIndex = 6;
 			this.groupBox_URL.TabStop = false;
 			this.groupBox_URL.Text = "과목";
 			// 
 			// radioButton_Algorithm
 			// 
-			this.radioButton_Algorithm.AutoSize = true;
 			this.radioButton_Algorithm.Dock = System.Windows.Forms.DockStyle.Top;
-			this.radioButton_Algorithm.Location = new System.Drawing.Point(12, 152);
-			this.radioButton_Algorithm.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Algorithm.Location = new System.Drawing.Point(3, 161);
 			this.radioButton_Algorithm.Name = "radioButton_Algorithm";
-			this.radioButton_Algorithm.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Algorithm.Padding = new System.Windows.Forms.Padding(3);
+			this.radioButton_Algorithm.Size = new System.Drawing.Size(762, 42);
 			this.radioButton_Algorithm.TabIndex = 3;
 			this.radioButton_Algorithm.TabStop = true;
 			this.radioButton_Algorithm.Text = "알고리즘";
@@ -120,12 +120,11 @@
 			// 
 			// radioButton_Datastructure
 			// 
-			this.radioButton_Datastructure.AutoSize = true;
 			this.radioButton_Datastructure.Dock = System.Windows.Forms.DockStyle.Top;
-			this.radioButton_Datastructure.Location = new System.Drawing.Point(12, 116);
-			this.radioButton_Datastructure.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Datastructure.Location = new System.Drawing.Point(3, 119);
 			this.radioButton_Datastructure.Name = "radioButton_Datastructure";
-			this.radioButton_Datastructure.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Datastructure.Padding = new System.Windows.Forms.Padding(3);
+			this.radioButton_Datastructure.Size = new System.Drawing.Size(762, 42);
 			this.radioButton_Datastructure.TabIndex = 2;
 			this.radioButton_Datastructure.TabStop = true;
 			this.radioButton_Datastructure.Text = "자료구조";
@@ -134,12 +133,11 @@
 			// 
 			// radioButton_Discrete
 			// 
-			this.radioButton_Discrete.AutoSize = true;
 			this.radioButton_Discrete.Dock = System.Windows.Forms.DockStyle.Top;
-			this.radioButton_Discrete.Location = new System.Drawing.Point(12, 80);
-			this.radioButton_Discrete.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Discrete.Location = new System.Drawing.Point(3, 77);
 			this.radioButton_Discrete.Name = "radioButton_Discrete";
-			this.radioButton_Discrete.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Discrete.Padding = new System.Windows.Forms.Padding(3);
+			this.radioButton_Discrete.Size = new System.Drawing.Size(762, 42);
 			this.radioButton_Discrete.TabIndex = 1;
 			this.radioButton_Discrete.TabStop = true;
 			this.radioButton_Discrete.Text = "이산구조";
@@ -148,36 +146,36 @@
 			// 
 			// radioButton_Advanced
 			// 
-			this.radioButton_Advanced.AutoSize = true;
 			this.radioButton_Advanced.Dock = System.Windows.Forms.DockStyle.Top;
-			this.radioButton_Advanced.Location = new System.Drawing.Point(12, 44);
-			this.radioButton_Advanced.Margin = new System.Windows.Forms.Padding(6);
+			this.radioButton_Advanced.Location = new System.Drawing.Point(3, 35);
 			this.radioButton_Advanced.Name = "radioButton_Advanced";
-			this.radioButton_Advanced.Size = new System.Drawing.Size(750, 36);
+			this.radioButton_Advanced.Padding = new System.Windows.Forms.Padding(3);
+			this.radioButton_Advanced.Size = new System.Drawing.Size(762, 42);
 			this.radioButton_Advanced.TabIndex = 0;
 			this.radioButton_Advanced.TabStop = true;
 			this.radioButton_Advanced.Text = "고급프로그래밍";
 			this.radioButton_Advanced.UseVisualStyleBackColor = true;
 			this.radioButton_Advanced.Click += new System.EventHandler(this.radioButton_Click);
 			// 
-			// Form
+			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(774, 329);
-			this.Controls.Add(this.groupBox_URL);
 			this.Controls.Add(this.button_OK);
 			this.Controls.Add(this.button_Cancel);
+			this.Controls.Add(this.groupBox_URL);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("맑은 고딕", 9F);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Name = "Form";
+			this.Name = "FormMain";
+			this.Padding = new System.Windows.Forms.Padding(3);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "DruidPushApp";
 			this.TopMost = true;
 			this.contextMenuStrip.ResumeLayout(false);
 			this.groupBox_URL.ResumeLayout(false);
-			this.groupBox_URL.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
