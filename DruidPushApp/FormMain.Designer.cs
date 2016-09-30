@@ -61,12 +61,12 @@
 			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_Exit});
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(164, 42);
+			this.contextMenuStrip.Size = new System.Drawing.Size(139, 40);
 			// 
 			// ToolStripMenuItem_Exit
 			// 
 			this.ToolStripMenuItem_Exit.Name = "ToolStripMenuItem_Exit";
-			this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(163, 38);
+			this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(138, 36);
 			this.ToolStripMenuItem_Exit.Text = "종료";
 			this.ToolStripMenuItem_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_Exit_Click);
 			// 
@@ -220,7 +220,6 @@
 			this.Padding = new System.Windows.Forms.Padding(3);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "DruidPushApp";
-			this.TopMost = true;
 			this.contextMenuStrip.ResumeLayout(false);
 			this.tableLayoutPanel_View.ResumeLayout(false);
 			this.groupBox_Subject.ResumeLayout(false);

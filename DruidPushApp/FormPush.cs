@@ -12,6 +12,14 @@ namespace DruidPushApp
 {
 	public partial class FormPush : Form
 	{
+		private enum HwndInsertAfter
+		{
+			HWND_BOTTOM = 1,
+			HWND_NOTOPMOST = -2,
+			HWND_TOP = 0,
+			HWND_TOPMOST = -1
+		}
+
 		private int time = 0;
 
 		public FormPush()
@@ -28,11 +36,6 @@ namespace DruidPushApp
 			Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width, Screen.PrimaryScreen.WorkingArea.Height - Height);
 
 			MySetText(username, title);
-		}
-
-		private void FormPush_Load(object sender, EventArgs e)
-		{
-			SetForegroundWindow(this.Handle);
 		}
 
 		private void FormPush_Shown(object sender, EventArgs e)
@@ -59,8 +62,5 @@ namespace DruidPushApp
 			label_Username.Text = username;
 			label_Title.Text = title;
 		}
-
-		[System.Runtime.InteropServices.DllImport("user32.dll")]
-		private static extern bool SetForegroundWindow(IntPtr hWnd);
 	}
 }

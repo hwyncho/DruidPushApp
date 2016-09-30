@@ -9,6 +9,14 @@ namespace DruidPushApp
 {
 	public partial class FormMain : System.Windows.Forms.Form
 	{
+		private enum HwndInsertAfter
+		{
+			HWND_BOTTOM = 1,
+			HWND_NOTOPMOST = -2,
+			HWND_TOP = 0,
+			HWND_TOPMOST = -1
+		}
+
 		private Thread thread_parse;
 		
 		private String URL;         // 입력한 URL을 저장
@@ -32,21 +40,7 @@ namespace DruidPushApp
 		{
 			oldCount = MyGetCount();
 
-			Visible = false;
-			ShowInTaskbar = false;
-			WindowState = FormWindowState.Minimized;
-
-			// 알림 표시
-			/*
-			notifyIcon.BalloonTipTitle = "DruidPushApp";
-			notifyIcon.BalloonTipText = "백그라운드에서 실행 중 입니다.";
-			notifyIcon.ShowBalloonTip(1000);
-			*/
-			new Thread(() => MyPush2("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
-
-			// HTML 소스 파싱 스레드 생성 및 실행
-			thread_parse = new Thread(new ThreadStart(MyParse));
-			thread_parse.Start();
+			MyTrayMode(true);
 		}
 
 		private void button_Cancel_Click(object sender, EventArgs e)
@@ -56,11 +50,7 @@ namespace DruidPushApp
 
 		private void ToolStripMenuItem_Exit_Click(object sender, EventArgs e)
 		{
-			thread_parse.Abort();
-
-			Visible = true;
-			ShowInTaskbar = true;
-			WindowState = FormWindowState.Normal;
+			MyTrayMode(false);
 		}
 
 		/* 변수 초기화 함수 */
@@ -70,6 +60,33 @@ namespace DruidPushApp
 
 			oldCount = 0;
 			newCount = 0;
+		}
+
+		private void MyTrayMode(Boolean mode)
+		{
+			switch (mode)
+			{
+				case true:
+					ShowInTaskbar = false;
+					WindowState = FormWindowState.Minimized;
+					Visible = false;
+
+					new Thread(() => MyPush("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
+
+					// HTML 소스 파싱 스레드 생성 및 실행
+					thread_parse = new Thread(new ThreadStart(MyParse));
+					thread_parse.Start();
+					break;
+
+				case false:
+					thread_parse.Abort();       // HTML 소스 파싱 스레드 종료
+
+					Visible = true;
+					WindowState = FormWindowState.Normal;
+					ShowInTaskbar = true;
+					
+					break;
+			}
 		}
 
 		private int MyGetCount()
@@ -142,8 +159,7 @@ namespace DruidPushApp
 
 				if (newCount > oldCount)
 				{
-					//new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
-					new Thread(() => MyPush2(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
+					new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
 					oldCount = newCount;
 				}
 			}
@@ -152,14 +168,10 @@ namespace DruidPushApp
 		/* 알림 표시 함수 */
 		private void MyPush(String username, String title)
 		{
-			notifyIcon.BalloonTipTitle = "새 질문이 등록되었습니다.";
-			notifyIcon.BalloonTipText = "작성자 : " + username + "\n" + "제목 : " + title;
-			notifyIcon.ShowBalloonTip(3000);
-		}
+			FormBackground formBackground = new FormBackground();
 
-		private void MyPush2(String username, String title)
-		{
 			FormPush formPush = new FormPush(username, title);
+			formPush.Owner = formBackground;
 			formPush.ShowDialog();
 		}
 	}
