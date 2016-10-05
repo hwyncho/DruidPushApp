@@ -12,14 +12,6 @@ namespace DruidPushApp
 {
 	public partial class FormPush : Form
 	{
-		private enum HwndInsertAfter
-		{
-			HWND_BOTTOM = 1,
-			HWND_NOTOPMOST = -2,
-			HWND_TOP = 0,
-			HWND_TOPMOST = -1
-		}
-
 		private int time = 0;
 
 		public FormPush()
