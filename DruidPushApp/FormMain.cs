@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-
-using HtmlAgilityPack;
 
 namespace DruidPushApp
 {
