@@ -7,15 +7,7 @@ namespace DruidPushApp
 {
 	public partial class FormMain : System.Windows.Forms.Form
 	{
-		private enum HwndInsertAfter
-		{
-			HWND_BOTTOM = 1,
-			HWND_NOTOPMOST = -2,
-			HWND_TOP = 0,
-			HWND_TOPMOST = -1
-		}
-
-		private Thread thread_parse;
+		//private Thread thread_parse;
 		
 		private String URL;         // 입력한 URL을 저장
 
@@ -51,6 +43,11 @@ namespace DruidPushApp
 			MyTrayMode(false);
 		}
 
+		private void timer_Tick(object sender, EventArgs e)
+		{
+			new Thread(new ThreadStart(MyParse2)).Start();
+		}
+
 		/* 변수 초기화 함수 */
 		private void MySetVariable()
 		{
@@ -71,13 +68,25 @@ namespace DruidPushApp
 
 					new Thread(() => MyPush("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
 
+					/*
 					// HTML 소스 파싱 스레드 생성 및 실행
 					thread_parse = new Thread(new ThreadStart(MyParse));
 					thread_parse.Start();
+					*/
+
+					// Timer 활성화
+					timer.Enabled = true;
+					timer.Start();
 					break;
 
 				case false:
+					/*
 					thread_parse.Abort();       // HTML 소스 파싱 스레드 종료
+					*/
+
+					// Timer 비활성화
+					timer.Stop();
+					timer.Enabled = false;
 
 					Visible = true;
 					WindowState = FormWindowState.Normal;
@@ -136,6 +145,7 @@ namespace DruidPushApp
 		}
 
 		/* HTML 소스 파싱 함수 */
+		/*
 		private void MyParse()
 		{
 			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
@@ -161,6 +171,38 @@ namespace DruidPushApp
 					oldCount = newCount;
 				}
 			}
+		}
+		*/
+
+		private void MyParse2()
+		{
+			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
+			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
+			HtmlAgilityPack.HtmlNode htmlNode;
+			HtmlAgilityPack.HtmlNode htmlNode_Number;
+			HtmlAgilityPack.HtmlNode htmlNode_Title;
+			HtmlAgilityPack.HtmlNode htmlNode_Writer;
+
+			try
+			{
+				htmlDocument = htmlWeb.Load(URL);
+				htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//t").First();
+				htmlNode_Number = htmlNode.SelectNodes(".//th").First();
+				htmlNode_Title = htmlNode.SelectNodes(".//td//a[@class='detail-title']").First();
+				htmlNode_Writer = htmlNode.SelectNodes(".//td[@class='text-center detail-username']").First();
+
+				newCount = Convert.ToInt32(htmlNode_Number.InnerHtml);
+
+				if (newCount > oldCount)
+				{
+					new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
+					oldCount = newCount;
+				}
+			}
+			catch (Exception e)
+			{
+				throw;
+			}		
 		}
 
 		/* 알림 표시 함수 */

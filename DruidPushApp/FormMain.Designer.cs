@@ -42,6 +42,7 @@
 			this.radioButton_Algorithm = new System.Windows.Forms.RadioButton();
 			this.button_OK = new System.Windows.Forms.Button();
 			this.button_Cancel = new System.Windows.Forms.Button();
+			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.contextMenuStrip.SuspendLayout();
 			this.tableLayoutPanel_View.SuspendLayout();
 			this.groupBox_Subject.SuspendLayout();
@@ -61,12 +62,12 @@
 			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_Exit});
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(139, 40);
+			this.contextMenuStrip.Size = new System.Drawing.Size(99, 26);
 			// 
 			// ToolStripMenuItem_Exit
 			// 
 			this.ToolStripMenuItem_Exit.Name = "ToolStripMenuItem_Exit";
-			this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(138, 36);
+			this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(98, 22);
 			this.ToolStripMenuItem_Exit.Text = "종료";
 			this.ToolStripMenuItem_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_Exit_Click);
 			// 
@@ -78,24 +79,26 @@
 			this.tableLayoutPanel_View.Controls.Add(this.button_OK, 0, 1);
 			this.tableLayoutPanel_View.Controls.Add(this.button_Cancel, 0, 2);
 			this.tableLayoutPanel_View.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel_View.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel_View.Location = new System.Drawing.Point(2, 2);
 			this.tableLayoutPanel_View.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel_View.Name = "tableLayoutPanel_View";
-			this.tableLayoutPanel_View.Padding = new System.Windows.Forms.Padding(3);
+			this.tableLayoutPanel_View.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tableLayoutPanel_View.RowCount = 3;
 			this.tableLayoutPanel_View.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
 			this.tableLayoutPanel_View.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
 			this.tableLayoutPanel_View.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-			this.tableLayoutPanel_View.Size = new System.Drawing.Size(768, 423);
+			this.tableLayoutPanel_View.Size = new System.Drawing.Size(383, 210);
 			this.tableLayoutPanel_View.TabIndex = 0;
 			// 
 			// groupBox_Subject
 			// 
 			this.groupBox_Subject.Controls.Add(this.tableLayoutPanel_Subject);
 			this.groupBox_Subject.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBox_Subject.Location = new System.Drawing.Point(6, 6);
+			this.groupBox_Subject.Location = new System.Drawing.Point(4, 4);
+			this.groupBox_Subject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.groupBox_Subject.Name = "groupBox_Subject";
-			this.groupBox_Subject.Size = new System.Drawing.Size(756, 285);
+			this.groupBox_Subject.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.groupBox_Subject.Size = new System.Drawing.Size(375, 140);
 			this.groupBox_Subject.TabIndex = 0;
 			this.groupBox_Subject.TabStop = false;
 			this.groupBox_Subject.Text = "과목";
@@ -111,13 +114,14 @@
 			this.tableLayoutPanel_Subject.Controls.Add(this.radioButton_Datastructure, 0, 1);
 			this.tableLayoutPanel_Subject.Controls.Add(this.radioButton_Algorithm, 1, 1);
 			this.tableLayoutPanel_Subject.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel_Subject.Location = new System.Drawing.Point(3, 35);
+			this.tableLayoutPanel_Subject.Location = new System.Drawing.Point(2, 18);
+			this.tableLayoutPanel_Subject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tableLayoutPanel_Subject.Name = "tableLayoutPanel_Subject";
-			this.tableLayoutPanel_Subject.Padding = new System.Windows.Forms.Padding(3);
+			this.tableLayoutPanel_Subject.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tableLayoutPanel_Subject.RowCount = 2;
 			this.tableLayoutPanel_Subject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel_Subject.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel_Subject.Size = new System.Drawing.Size(750, 247);
+			this.tableLayoutPanel_Subject.Size = new System.Drawing.Size(371, 120);
 			this.tableLayoutPanel_Subject.TabIndex = 0;
 			// 
 			// radioButton_Advanced
@@ -125,10 +129,11 @@
 			this.radioButton_Advanced.AutoSize = true;
 			this.radioButton_Advanced.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.radioButton_Advanced.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.radioButton_Advanced.Location = new System.Drawing.Point(7, 7);
+			this.radioButton_Advanced.Location = new System.Drawing.Point(5, 5);
+			this.radioButton_Advanced.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.radioButton_Advanced.Name = "radioButton_Advanced";
-			this.radioButton_Advanced.Padding = new System.Windows.Forms.Padding(0, 24, 0, 0);
-			this.radioButton_Advanced.Size = new System.Drawing.Size(364, 113);
+			this.radioButton_Advanced.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
+			this.radioButton_Advanced.Size = new System.Drawing.Size(178, 52);
 			this.radioButton_Advanced.TabIndex = 0;
 			this.radioButton_Advanced.TabStop = true;
 			this.radioButton_Advanced.Text = "고급프로그래밍";
@@ -141,10 +146,11 @@
 			this.radioButton_Discrete.AutoSize = true;
 			this.radioButton_Discrete.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.radioButton_Discrete.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.radioButton_Discrete.Location = new System.Drawing.Point(378, 7);
+			this.radioButton_Discrete.Location = new System.Drawing.Point(188, 5);
+			this.radioButton_Discrete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.radioButton_Discrete.Name = "radioButton_Discrete";
-			this.radioButton_Discrete.Padding = new System.Windows.Forms.Padding(0, 24, 0, 0);
-			this.radioButton_Discrete.Size = new System.Drawing.Size(365, 113);
+			this.radioButton_Discrete.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
+			this.radioButton_Discrete.Size = new System.Drawing.Size(178, 52);
 			this.radioButton_Discrete.TabIndex = 1;
 			this.radioButton_Discrete.TabStop = true;
 			this.radioButton_Discrete.Text = "이산구조";
@@ -157,10 +163,11 @@
 			this.radioButton_Datastructure.AutoSize = true;
 			this.radioButton_Datastructure.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.radioButton_Datastructure.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.radioButton_Datastructure.Location = new System.Drawing.Point(7, 127);
+			this.radioButton_Datastructure.Location = new System.Drawing.Point(5, 62);
+			this.radioButton_Datastructure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.radioButton_Datastructure.Name = "radioButton_Datastructure";
-			this.radioButton_Datastructure.Padding = new System.Windows.Forms.Padding(0, 24, 0, 0);
-			this.radioButton_Datastructure.Size = new System.Drawing.Size(364, 113);
+			this.radioButton_Datastructure.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
+			this.radioButton_Datastructure.Size = new System.Drawing.Size(178, 53);
 			this.radioButton_Datastructure.TabIndex = 2;
 			this.radioButton_Datastructure.TabStop = true;
 			this.radioButton_Datastructure.Text = "자료구조";
@@ -173,10 +180,11 @@
 			this.radioButton_Algorithm.AutoSize = true;
 			this.radioButton_Algorithm.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.radioButton_Algorithm.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.radioButton_Algorithm.Location = new System.Drawing.Point(378, 127);
+			this.radioButton_Algorithm.Location = new System.Drawing.Point(188, 62);
+			this.radioButton_Algorithm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.radioButton_Algorithm.Name = "radioButton_Algorithm";
-			this.radioButton_Algorithm.Padding = new System.Windows.Forms.Padding(0, 24, 0, 0);
-			this.radioButton_Algorithm.Size = new System.Drawing.Size(365, 113);
+			this.radioButton_Algorithm.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
+			this.radioButton_Algorithm.Size = new System.Drawing.Size(178, 53);
 			this.radioButton_Algorithm.TabIndex = 3;
 			this.radioButton_Algorithm.TabStop = true;
 			this.radioButton_Algorithm.Text = "알고리즘";
@@ -187,9 +195,10 @@
 			// button_OK
 			// 
 			this.button_OK.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.button_OK.Location = new System.Drawing.Point(6, 297);
+			this.button_OK.Location = new System.Drawing.Point(4, 148);
+			this.button_OK.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.button_OK.Name = "button_OK";
-			this.button_OK.Size = new System.Drawing.Size(756, 56);
+			this.button_OK.Size = new System.Drawing.Size(375, 26);
 			this.button_OK.TabIndex = 1;
 			this.button_OK.Text = "확인";
 			this.button_OK.UseVisualStyleBackColor = true;
@@ -198,26 +207,34 @@
 			// button_Cancel
 			// 
 			this.button_Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.button_Cancel.Location = new System.Drawing.Point(6, 359);
+			this.button_Cancel.Location = new System.Drawing.Point(4, 178);
+			this.button_Cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.button_Cancel.Name = "button_Cancel";
-			this.button_Cancel.Size = new System.Drawing.Size(756, 58);
+			this.button_Cancel.Size = new System.Drawing.Size(375, 28);
 			this.button_Cancel.TabIndex = 2;
 			this.button_Cancel.Text = "종료";
 			this.button_Cancel.UseVisualStyleBackColor = true;
 			this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
 			// 
+			// timer
+			// 
+			this.timer.Interval = 1000;
+			this.timer.Tick += new System.EventHandler(this.timer_Tick);
+			// 
 			// FormMain
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(774, 429);
+			this.BackColor = System.Drawing.SystemColors.Control;
+			this.ClientSize = new System.Drawing.Size(387, 214);
 			this.Controls.Add(this.tableLayoutPanel_View);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("맑은 고딕", 9F);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "FormMain";
-			this.Padding = new System.Windows.Forms.Padding(3);
+			this.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "DruidPushApp";
 			this.contextMenuStrip.ResumeLayout(false);
@@ -243,6 +260,7 @@
 		private System.Windows.Forms.RadioButton radioButton_Discrete;
 		private System.Windows.Forms.RadioButton radioButton_Datastructure;
 		private System.Windows.Forms.RadioButton radioButton_Algorithm;
+		private System.Windows.Forms.Timer timer;
 	}
 }
 

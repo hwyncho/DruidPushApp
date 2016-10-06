@@ -9,10 +9,7 @@ namespace DruidPushApp
 		public FormBackground()
 		{
 			InitializeComponent();
-		}
 
-		private void FormBackground_Load(object sender, EventArgs e)
-		{
 			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 			BackColor = Color.Transparent;
 		}

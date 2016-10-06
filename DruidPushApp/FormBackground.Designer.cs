@@ -44,7 +44,6 @@
 			this.Text = "FormBackground";
 			this.TopMost = true;
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-			this.Load += new System.EventHandler(this.FormBackground_Load);
 			this.ResumeLayout(false);
 
 		}
