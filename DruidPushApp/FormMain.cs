@@ -186,7 +186,7 @@ namespace DruidPushApp
 			try
 			{
 				htmlDocument = htmlWeb.Load(URL);
-				htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//t").First();
+				htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr").First();
 				htmlNode_Number = htmlNode.SelectNodes(".//th").First();
 				htmlNode_Title = htmlNode.SelectNodes(".//td//a[@class='detail-title']").First();
 				htmlNode_Writer = htmlNode.SelectNodes(".//td[@class='text-center detail-username']").First();
