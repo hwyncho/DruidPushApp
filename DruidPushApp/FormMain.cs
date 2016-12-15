@@ -7,28 +7,36 @@ namespace DruidPushApp
 {
 	public partial class FormMain : System.Windows.Forms.Form
 	{
-		//private Thread thread_parse;
-		
-		private String URL;         // 입력한 URL을 저장
+		private const int INTERVAL_1 = 1000;
+		private const int INTERVAL_3 = 3000;
+		private const int INTERVAL_5 = 5000;
 
-		private int oldCount;		// 이전 게시물 갯수 저장
-		private int newCount;       // 새 게시물 갯수 저장
+		private const String URL_Advanced = "http://druid.kw.ac.kr/Board/Contents/Advanced";
+		private const String URL_Discrete = "http://druid.kw.ac.kr/Board/Contents/Discrete";
+		private const String URL_Datastructure = "http://druid.kw.ac.kr/Board/Contents/Datastructure";
+		private const String URL_Algorithm = "http://druid.kw.ac.kr/Board/Contents/Algorithm";
+
+		private String URL = "";         // 입력한 URL을 저장
+
+		private int oldCount = 0;		// 이전 게시물 갯수 저장
+		private int newCount = 0;       // 새 게시물 갯수 저장
 
 		public FormMain()
 		{
 			InitializeComponent();
 
-			MySetVariable();
+			this.MySetVariable();
 		}
 
 		private void radioButton_Click(object sender, EventArgs e)
 		{
-			MySelect();
+			this.MySelect();
 		}
 
 		private void button_OK_Click(object sender, EventArgs e)
 		{
-			oldCount = MyGetCount();
+			timer.Interval = INTERVAL_1;
+			this.oldCount = MyGetCount();
 
 			MyTrayMode(true);
 		}
@@ -40,21 +48,21 @@ namespace DruidPushApp
 
 		private void ToolStripMenuItem_Exit_Click(object sender, EventArgs e)
 		{
-			MyTrayMode(false);
+			this.MyTrayMode(false);
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
-			new Thread(new ThreadStart(MyParse2)).Start();
+			new Thread(new ThreadStart(MyParse)).Start();
 		}
 
 		/* 변수 초기화 함수 */
 		private void MySetVariable()
 		{
-			URL = "";
+			this.URL = "";
 
-			oldCount = 0;
-			newCount = 0;
+			this.oldCount = 0;
+			this.newCount = 0;
 		}
 
 		private void MyTrayMode(Boolean mode)
@@ -68,22 +76,12 @@ namespace DruidPushApp
 
 					new Thread(() => MyPush("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
 
-					/*
-					// HTML 소스 파싱 스레드 생성 및 실행
-					thread_parse = new Thread(new ThreadStart(MyParse));
-					thread_parse.Start();
-					*/
-
 					// Timer 활성화
 					timer.Enabled = true;
 					timer.Start();
 					break;
 
 				case false:
-					/*
-					thread_parse.Abort();       // HTML 소스 파싱 스레드 종료
-					*/
-
 					// Timer 비활성화
 					timer.Stop();
 					timer.Enabled = false;
@@ -116,7 +114,7 @@ namespace DruidPushApp
 				radioButton_Datastructure.Checked = false;
 				radioButton_Algorithm.Checked = false;
 
-				URL = "http://druid.kw.ac.kr/Board/Contents/Advanced";
+				this.URL = URL_Advanced;
 			}
 			else if (radioButton_Discrete.Checked == true)
 			{
@@ -124,7 +122,7 @@ namespace DruidPushApp
 				radioButton_Datastructure.Checked = false;
 				radioButton_Algorithm.Checked = false;
 
-				URL = "http://druid.kw.ac.kr/Board/Contents/Discrete";
+				this.URL = URL_Discrete;
 			}
 			else if (radioButton_Datastructure.Checked == true)
 			{
@@ -132,7 +130,7 @@ namespace DruidPushApp
 				radioButton_Discrete.Checked = false;
 				radioButton_Algorithm.Checked = false;
 
-				URL = "http://druid.kw.ac.kr/Board/Contents/Datastructure";
+				this.URL = URL_Datastructure;
 			}
 			else if (radioButton_Algorithm.Checked == true)
 			{
@@ -140,41 +138,12 @@ namespace DruidPushApp
 				radioButton_Discrete.Checked = false;
 				radioButton_Datastructure.Checked = false;
 
-				URL = "http://druid.kw.ac.kr/Board/Contents/Algorithm";
+				this.URL = URL_Algorithm;
 			}
 		}
 
 		/* HTML 소스 파싱 함수 */
-		/*
 		private void MyParse()
-		{
-			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
-			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
-			HtmlAgilityPack.HtmlNode htmlNode;
-			HtmlAgilityPack.HtmlNode htmlNode_Number;
-			HtmlAgilityPack.HtmlNode htmlNode_Title;
-			HtmlAgilityPack.HtmlNode htmlNode_Writer;
-
-			while (true)
-			{
-				htmlDocument = htmlWeb.Load(URL);
-				htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr").First();
-				htmlNode_Number = htmlNode.SelectNodes(".//th").First();
-				htmlNode_Title = htmlNode.SelectNodes(".//td//a[@class='detail-title']").First();
-				htmlNode_Writer = htmlNode.SelectNodes(".//td[@class='text-center detail-username']").First();
-
-				newCount = Convert.ToInt32(htmlNode_Number.InnerHtml);
-
-				if (newCount > oldCount)
-				{
-					new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
-					oldCount = newCount;
-				}
-			}
-		}
-		*/
-
-		private void MyParse2()
 		{
 			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
 			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
@@ -191,7 +160,7 @@ namespace DruidPushApp
 				htmlNode_Title = htmlNode.SelectNodes(".//td//a[@class='detail-title']").First();
 				htmlNode_Writer = htmlNode.SelectNodes(".//td[@class='text-center detail-username']").First();
 
-				newCount = Convert.ToInt32(htmlNode_Number.InnerHtml);
+				this.newCount = Convert.ToInt32(htmlNode_Number.InnerHtml);
 
 				if (newCount > oldCount)
 				{

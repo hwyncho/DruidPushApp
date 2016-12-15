@@ -27,8 +27,8 @@
     <TargetCulture>ko-KR</TargetCulture>
     <ProductName>DruidPushApp</ProductName>
     <PublisherName>조휘연</PublisherName>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>1.0.2.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -55,7 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon_144.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>CEC287C654150761AFE761BF7B1021DBCCF68C66</ManifestCertificateThumbprint>
@@ -67,7 +67,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
@@ -141,11 +141,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Icon.ico" />
+    <Content Include="icon_144.ico" />
+    <Content Include="Resources\icon_144.png" />
+    <Content Include="Resources\icon_192.png" />
+    <Content Include="Resources\icon_48.png" />
+    <Content Include="Resources\icon_512.png" />
+    <Content Include="Resources\icon_72.png" />
+    <Content Include="Resources\icon_96.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

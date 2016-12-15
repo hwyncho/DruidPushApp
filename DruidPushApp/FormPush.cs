@@ -37,9 +37,9 @@ namespace DruidPushApp
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
-			time++;
+			this.time++;
 
-			if (time == 3)
+			if (this.time == 3)
 				Close();
 		}
 
