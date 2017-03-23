@@ -16,6 +16,8 @@ namespace DruidPushApp
 		private const String URL_Datastructure = "http://druid.kw.ac.kr/Board/Contents/Datastructure";
 		private const String URL_Algorithm = "http://druid.kw.ac.kr/Board/Contents/Algorithm";
 
+		private int interval = 1000;
+
 		private String URL = "";         // 입력한 URL을 저장
 
 		private int oldCount = 0;		// 이전 게시물 갯수 저장
@@ -28,23 +30,69 @@ namespace DruidPushApp
 			this.MySetVariable();
 		}
 
+		private void ToolStripMenuItem_Interval_CheckStateChanged(object sender, EventArgs e)
+		{
+			Console.WriteLine("Hello");
+			this.MySelect_Interval();
+		}
+
+		private void ToolStripMenuItem_Interval_1_Click(object sender, EventArgs e)
+		{
+			this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Checked;
+			this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
+			this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
+
+			this.interval = INTERVAL_1;
+		}
+
+		private void ToolStripMenuItem_Interval_3_Click(object sender, EventArgs e)
+		{
+			this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
+			this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Checked;
+			this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
+
+			this.interval = INTERVAL_3;
+		}
+
+		private void ToolStripMenuItem_Interval_5_Click(object sender, EventArgs e)
+		{
+			this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
+			this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
+			this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Checked;
+
+			this.interval = INTERVAL_5;
+		}
+
+		private void ToolStripMenuItem_Quit_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
 		private void radioButton_Click(object sender, EventArgs e)
 		{
-			this.MySelect();
+			this.MySelect_Subject();
 		}
 
 		private void button_OK_Click(object sender, EventArgs e)
 		{
-			timer.Interval = INTERVAL_1;
-			this.oldCount = MyGetCount();
+			if (this.URL == "")
+			{
+				MessageBox.Show("과목을 선택하세요!");
+			}
+			else
+			{
+				timer.Interval = this.interval;
+				this.oldCount = MyGetCount();
 
-			MyTrayMode(true);
+				MyTrayMode(true);
+			}
 		}
 
 		private void button_Cancel_Click(object sender, EventArgs e)
 		{
-			Close();
+			this.Close();
 		}
+
 
 		private void ToolStripMenuItem_Exit_Click(object sender, EventArgs e)
 		{
@@ -70,75 +118,110 @@ namespace DruidPushApp
 			switch (mode)
 			{
 				case true:
-					ShowInTaskbar = false;
-					WindowState = FormWindowState.Minimized;
-					Visible = false;
+					this.ShowInTaskbar = false;
+					this.WindowState = FormWindowState.Minimized;
+					this.Visible = false;
 
 					new Thread(() => MyPush("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
 
 					// Timer 활성화
-					timer.Enabled = true;
-					timer.Start();
+					this.timer.Enabled = true;
+					this.timer.Start();
 					break;
 
 				case false:
 					// Timer 비활성화
-					timer.Stop();
-					timer.Enabled = false;
+					this.timer.Stop();
+					this.timer.Enabled = false;
 
-					Visible = true;
-					WindowState = FormWindowState.Normal;
-					ShowInTaskbar = true;
+					this.Visible = true;
+					this.WindowState = FormWindowState.Normal;
+					this.ShowInTaskbar = true;
 					
 					break;
 			}
 		}
 
+		/* 알림주기 선택 함수 */
+		private void MySelect_Interval()
+		{
+			if (this.ToolStripMenuItem_Interval_1.CheckState == CheckState.Checked)
+			{
+				this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
+				this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
+
+				this.interval = INTERVAL_1;
+			}
+			else if (ToolStripMenuItem_Interval_3.CheckState == CheckState.Checked)
+			{
+				this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
+				this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
+
+				this.interval = INTERVAL_3;
+			}
+			else if (ToolStripMenuItem_Interval_5.CheckState == CheckState.Checked)
+			{
+				this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
+				this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
+
+				this.interval = INTERVAL_5;
+			}
+		}
+
+		/* 과목 선택 함수 */
+		private void MySelect_Subject()
+		{
+			if (this.radioButton_Advanced.Checked == true)
+			{
+				this.radioButton_Discrete.Checked = false;
+				this.radioButton_Datastructure.Checked = false;
+				this.radioButton_Algorithm.Checked = false;
+
+				this.URL = URL_Advanced;
+			}
+			else if (this.radioButton_Discrete.Checked == true)
+			{
+				this.radioButton_Advanced.Checked = false;
+				this.radioButton_Datastructure.Checked = false;
+				this.radioButton_Algorithm.Checked = false;
+
+				this.URL = URL_Discrete;
+			}
+			else if (this.radioButton_Datastructure.Checked == true)
+			{
+				this.radioButton_Advanced.Checked = false;
+				this.radioButton_Discrete.Checked = false;
+				this.radioButton_Algorithm.Checked = false;
+
+				this.URL = URL_Datastructure;
+			}
+			else if (this.radioButton_Algorithm.Checked == true)
+			{
+				this.radioButton_Advanced.Checked = false;
+				this.radioButton_Discrete.Checked = false;
+				this.radioButton_Datastructure.Checked = false;
+
+				this.URL = URL_Algorithm;
+			}
+		}
+
+		/* 최신 글번호 반환 함수 */
 		private int MyGetCount()
 		{
 			HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
 			HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
 			HtmlAgilityPack.HtmlNode htmlNode;
 
-			htmlDocument = htmlWeb.Load(URL);
-			htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr//th").First();
-
-			return Convert.ToInt32(htmlNode.InnerHtml);
-		}
-
-		private void MySelect()
-		{
-			if (radioButton_Advanced.Checked == true)
+			try
 			{
-				radioButton_Discrete.Checked = false;
-				radioButton_Datastructure.Checked = false;
-				radioButton_Algorithm.Checked = false;
+				htmlDocument = htmlWeb.Load(URL);
+				htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr//th").First();
 
-				this.URL = URL_Advanced;
+				return Convert.ToInt32(htmlNode.InnerHtml);
 			}
-			else if (radioButton_Discrete.Checked == true)
+			catch (Exception e)
 			{
-				radioButton_Advanced.Checked = false;
-				radioButton_Datastructure.Checked = false;
-				radioButton_Algorithm.Checked = false;
-
-				this.URL = URL_Discrete;
-			}
-			else if (radioButton_Datastructure.Checked == true)
-			{
-				radioButton_Advanced.Checked = false;
-				radioButton_Discrete.Checked = false;
-				radioButton_Algorithm.Checked = false;
-
-				this.URL = URL_Datastructure;
-			}
-			else if (radioButton_Algorithm.Checked == true)
-			{
-				radioButton_Advanced.Checked = false;
-				radioButton_Discrete.Checked = false;
-				radioButton_Datastructure.Checked = false;
-
-				this.URL = URL_Algorithm;
+				return 0;
 			}
 		}
 
@@ -162,15 +245,15 @@ namespace DruidPushApp
 
 				this.newCount = Convert.ToInt32(htmlNode_Number.InnerHtml);
 
-				if (newCount > oldCount)
+				if (this.newCount > this.oldCount)
 				{
 					new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
-					oldCount = newCount;
+					this.oldCount = this.newCount;
 				}
 			}
 			catch (Exception e)
 			{
-				throw;
+				return;
 			}		
 		}
 
