@@ -16,24 +16,18 @@ namespace DruidPushApp
 		private const String URL_Datastructure = "http://druid.kw.ac.kr/Board/Contents/Datastructure";
 		private const String URL_Algorithm = "http://druid.kw.ac.kr/Board/Contents/Algorithm";
 
-		private int interval = 1000;
+		private int interval = 1000;		// 알림 주기를 저장
 
-		private String URL = "";         // 입력한 URL을 저장
+		private String URL = "";			// 입력한 URL을 저장
 
-		private int oldCount = 0;		// 이전 게시물 갯수 저장
-		private int newCount = 0;       // 새 게시물 갯수 저장
+		private int oldCount = 0;			// 이전 게시물 갯수 저장
+		private int newCount = 0;			// 새 게시물 갯수 저장
 
 		public FormMain()
 		{
 			InitializeComponent();
 
 			this.MySetVariable();
-		}
-
-		private void ToolStripMenuItem_Interval_CheckStateChanged(object sender, EventArgs e)
-		{
-			Console.WriteLine("Hello");
-			this.MySelect_Interval();
 		}
 
 		private void ToolStripMenuItem_Interval_1_Click(object sender, EventArgs e)
