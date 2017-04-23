@@ -30,16 +30,18 @@ namespace DruidPushApp
 			this.MySetVariable();
 		}
 
-		private void ToolStripMenuItem_Interval_1_Click(object sender, EventArgs e)
+        /* 설정 > 알림주기 > 1초 */
+        private void ToolStripMenuItem_Interval_1_Click(object sender, EventArgs e)
 		{
-			this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Checked;
-			this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
-			this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Checked;
+            this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
 
-			this.interval = INTERVAL_1;
-		}
+            this.interval = INTERVAL_1;
+        }
 
-		private void ToolStripMenuItem_Interval_3_Click(object sender, EventArgs e)
+        /* 설정 > 알림주기 > 3초 */
+        private void ToolStripMenuItem_Interval_3_Click(object sender, EventArgs e)
 		{
 			this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
 			this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Checked;
@@ -48,7 +50,8 @@ namespace DruidPushApp
 			this.interval = INTERVAL_3;
 		}
 
-		private void ToolStripMenuItem_Interval_5_Click(object sender, EventArgs e)
+        /* 설정 > 알림주기 > 5초 */
+        private void ToolStripMenuItem_Interval_5_Click(object sender, EventArgs e)
 		{
 			this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
 			this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
@@ -57,6 +60,7 @@ namespace DruidPushApp
 			this.interval = INTERVAL_5;
 		}
 
+        /* 설정 > 종료 */
 		private void ToolStripMenuItem_Quit_Click(object sender, EventArgs e)
 		{
 			this.Close();
@@ -87,7 +91,6 @@ namespace DruidPushApp
 			this.Close();
 		}
 
-
 		private void ToolStripMenuItem_Exit_Click(object sender, EventArgs e)
 		{
 			this.MyTrayMode(false);
@@ -116,11 +119,18 @@ namespace DruidPushApp
 					this.WindowState = FormWindowState.Minimized;
 					this.Visible = false;
 
-					new Thread(() => MyPush("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
+                    //new Thread(() => MyPush("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
 
-					// Timer 활성화
-					this.timer.Enabled = true;
+                    this.notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+                    this.notifyIcon.BalloonTipTitle = "백그라운드에서 실행 중 입니다.";
+                    this.notifyIcon.BalloonTipText = "새 글이 등록되면 알려드립니다.";
+                    this.notifyIcon.ShowBalloonTip(3000);
+
+                    // Timer 활성화
+                    this.timer.Interval = this.interval;
+                    this.timer.Enabled = true;
 					this.timer.Start();
+
 					break;
 
 				case false:
@@ -133,32 +143,6 @@ namespace DruidPushApp
 					this.ShowInTaskbar = true;
 					
 					break;
-			}
-		}
-
-		/* 알림주기 선택 함수 */
-		private void MySelect_Interval()
-		{
-			if (this.ToolStripMenuItem_Interval_1.CheckState == CheckState.Checked)
-			{
-				this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
-				this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
-
-				this.interval = INTERVAL_1;
-			}
-			else if (ToolStripMenuItem_Interval_3.CheckState == CheckState.Checked)
-			{
-				this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
-				this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
-
-				this.interval = INTERVAL_3;
-			}
-			else if (ToolStripMenuItem_Interval_5.CheckState == CheckState.Checked)
-			{
-				this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
-				this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
-
-				this.interval = INTERVAL_5;
 			}
 		}
 
@@ -241,7 +225,7 @@ namespace DruidPushApp
 
 				if (this.newCount > this.oldCount)
 				{
-					new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
+					new Thread(() => MyPush2(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
 					this.oldCount = this.newCount;
 				}
 			}
@@ -252,13 +236,22 @@ namespace DruidPushApp
 		}
 
 		/* 알림 표시 함수 */
-		private void MyPush(String username, String title)
+		private void MyPush(String writer, String title)
 		{
 			FormBackground formBackground = new FormBackground();
 
-			FormPush formPush = new FormPush(username, title);
+			FormPush formPush = new FormPush(writer, title);
 			formPush.Owner = formBackground;
 			formPush.ShowDialog();
 		}
-	}
+
+        /* 알림 표시 함수 */
+        private void MyPush2(String writer, String title)
+        {
+            this.notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            this.notifyIcon.BalloonTipTitle = "새 질문이 등록되었습니다.";
+            this.notifyIcon.BalloonTipText = "작성자 : " + writer + "\n" + "제목 : " + title;
+            this.notifyIcon.ShowBalloonTip(3000);
+        }
+    }
 }
