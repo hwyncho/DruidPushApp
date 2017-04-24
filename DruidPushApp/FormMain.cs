@@ -2,23 +2,25 @@
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 
 namespace DruidPushApp
 {
 	public partial class FormMain : System.Windows.Forms.Form
 	{
-		private const int INTERVAL_1 = 1000;
-		private const int INTERVAL_3 = 3000;
-		private const int INTERVAL_5 = 5000;
+		private const int INTERVAL_1 = 1000;        // 알림주기 1초
+		private const int INTERVAL_3 = 3000;        // 알림주기 3초
+		private const int INTERVAL_5 = 5000;        // 알림주기 5초
 
-		private const String URL_Advanced = "http://druid.kw.ac.kr/Board/Contents/Advanced";
-		private const String URL_Discrete = "http://druid.kw.ac.kr/Board/Contents/Discrete";
-		private const String URL_Datastructure = "http://druid.kw.ac.kr/Board/Contents/Datastructure";
-		private const String URL_Algorithm = "http://druid.kw.ac.kr/Board/Contents/Algorithm";
+        private const String URL = "http://druid.kw.ac.kr/Board/";      // 게시판 URL
+		private const String ADVANCED = "Advanced";                     // 고급프로그래밍
+		private const String DISCRETE = "Discrete";                     // 이산구조
+		private const String DATASTRUCTURE = "Datastructure";           // 자료구조
+		private const String ALGORITHM = "Algorithm";                   // 알고리즘
 
-		private int interval = 1000;		// 알림 주기를 저장
+        private int interval = 1000;        // 선택한 알림 주기를 저장
 
-		private String URL = "";			// 입력한 URL을 저장
+		private String subject = "";		// 선택한 과목을 저장
 
 		private int oldCount = 0;			// 이전 게시물 갯수 저장
 		private int newCount = 0;			// 새 게시물 갯수 저장
@@ -66,14 +68,16 @@ namespace DruidPushApp
 			this.Close();
 		}
 
+        /* 과목 */
 		private void radioButton_Click(object sender, EventArgs e)
 		{
 			this.MySelect_Subject();
 		}
 
+        /* 확인 */
 		private void button_OK_Click(object sender, EventArgs e)
 		{
-			if (this.URL == "")
+			if (this.subject == "")
 			{
 				MessageBox.Show("과목을 선택하세요!");
 			}
@@ -86,11 +90,13 @@ namespace DruidPushApp
 			}
 		}
 
+        /* 종료 */
 		private void button_Cancel_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
 
+        /* notifyIcon > 종료 */
 		private void ToolStripMenuItem_Exit_Click(object sender, EventArgs e)
 		{
 			this.MyTrayMode(false);
@@ -101,10 +107,17 @@ namespace DruidPushApp
 			new Thread(new ThreadStart(MyParse)).Start();
 		}
 
-		/* 변수 초기화 함수 */
-		private void MySetVariable()
+        private void notifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(URL + subject + "/" + this.newCount);
+        }
+
+        /* 변수 초기화 함수 */
+        private void MySetVariable()
 		{
-			this.URL = "";
+            this.interval = 1000;
+
+			this.subject = "";
 
 			this.oldCount = 0;
 			this.newCount = 0;
@@ -118,9 +131,7 @@ namespace DruidPushApp
 					this.ShowInTaskbar = false;
 					this.WindowState = FormWindowState.Minimized;
 					this.Visible = false;
-
-                    //new Thread(() => MyPush("DruidPushApp", "백그라운드에서 실행 중 입니다.")).Start();
-
+                    
                     this.notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
                     this.notifyIcon.BalloonTipTitle = "백그라운드에서 실행 중 입니다.";
                     this.notifyIcon.BalloonTipText = "새 글이 등록되면 알려드립니다.";
@@ -155,7 +166,7 @@ namespace DruidPushApp
 				this.radioButton_Datastructure.Checked = false;
 				this.radioButton_Algorithm.Checked = false;
 
-				this.URL = URL_Advanced;
+				this.subject = ADVANCED;
 			}
 			else if (this.radioButton_Discrete.Checked == true)
 			{
@@ -163,7 +174,7 @@ namespace DruidPushApp
 				this.radioButton_Datastructure.Checked = false;
 				this.radioButton_Algorithm.Checked = false;
 
-				this.URL = URL_Discrete;
+				this.subject = DISCRETE;
 			}
 			else if (this.radioButton_Datastructure.Checked == true)
 			{
@@ -171,7 +182,7 @@ namespace DruidPushApp
 				this.radioButton_Discrete.Checked = false;
 				this.radioButton_Algorithm.Checked = false;
 
-				this.URL = URL_Datastructure;
+				this.subject = DATASTRUCTURE;
 			}
 			else if (this.radioButton_Algorithm.Checked == true)
 			{
@@ -179,7 +190,7 @@ namespace DruidPushApp
 				this.radioButton_Discrete.Checked = false;
 				this.radioButton_Datastructure.Checked = false;
 
-				this.URL = URL_Algorithm;
+				this.subject = ALGORITHM;
 			}
 		}
 
@@ -192,7 +203,7 @@ namespace DruidPushApp
 
 			try
 			{
-				htmlDocument = htmlWeb.Load(URL);
+				htmlDocument = htmlWeb.Load(URL + "Contents/" + subject);
 				htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr//th").First();
 
 				return Convert.ToInt32(htmlNode.InnerHtml);
@@ -215,7 +226,7 @@ namespace DruidPushApp
 
 			try
 			{
-				htmlDocument = htmlWeb.Load(URL);
+				htmlDocument = htmlWeb.Load(URL + "Contents/" + subject);
 				htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr").First();
 				htmlNode_Number = htmlNode.SelectNodes(".//th").First();
 				htmlNode_Title = htmlNode.SelectNodes(".//td//a[@class='detail-title']").First();
@@ -248,7 +259,7 @@ namespace DruidPushApp
         /* 알림 표시 함수 */
         private void MyPush2(String writer, String title)
         {
-            this.notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            this.notifyIcon.BalloonTipIcon = ToolTipIcon.None;
             this.notifyIcon.BalloonTipTitle = "새 질문이 등록되었습니다.";
             this.notifyIcon.BalloonTipText = "작성자 : " + writer + "\n" + "제목 : " + title;
             this.notifyIcon.ShowBalloonTip(3000);

@@ -43,9 +43,9 @@ namespace DruidPushApp
 				Close();
 		}
 
-		private void MySetText(String username, String title)
+		private void MySetText(String writer, String title)
 		{
-			label_Username.Text = username;
+			label_Writer.Text = writer;
 			label_Title.Text = title;
 		}
 	}
