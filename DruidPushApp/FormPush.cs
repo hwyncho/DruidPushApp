@@ -8,6 +8,8 @@ namespace DruidPushApp
 	{
 		private int time = 0;
 
+        private String url = "";
+
 		public FormPush()
 		{
 			InitializeComponent();
@@ -15,12 +17,13 @@ namespace DruidPushApp
 			Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width, Screen.PrimaryScreen.WorkingArea.Height - Height);
 		}
 
-		public FormPush(String username, String title)
+		public FormPush(String username, String title, String url)
 		{
 			InitializeComponent();
 
 			Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width, Screen.PrimaryScreen.WorkingArea.Height - Height);
 
+            this.url = url;
 			MySetText(username, title);
 		}
 
@@ -32,7 +35,7 @@ namespace DruidPushApp
 
 		private void FormPush_Click(object sender, EventArgs e)
 		{
-			//System.Diagnostics.Process.Start(URL);
+            //System.Diagnostics.Process.Start(this.url);
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -48,5 +51,5 @@ namespace DruidPushApp
 			label_Writer.Text = writer;
 			label_Title.Text = title;
 		}
-	}
+    }
 }

@@ -236,7 +236,7 @@ namespace DruidPushApp
 
 				if (this.newCount > this.oldCount)
 				{
-					new Thread(() => MyPush2(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
+					new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
 					this.oldCount = this.newCount;
 				}
 			}
@@ -249,9 +249,12 @@ namespace DruidPushApp
 		/* 알림 표시 함수 */
 		private void MyPush(String writer, String title)
 		{
-			FormBackground formBackground = new FormBackground();
+            String url = URL + subject + "/" + this.newCount;
 
-			FormPush formPush = new FormPush(writer, title);
+
+            FormBackground formBackground = new FormBackground();
+
+			FormPush formPush = new FormPush(writer, title, url);
 			formPush.Owner = formBackground;
 			formPush.ShowDialog();
 		}
