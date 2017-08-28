@@ -27,7 +27,7 @@
     <TargetCulture>ko-KR</TargetCulture>
     <ProductName>DruidPushApp</ProductName>
     <PublisherName>조휘연</PublisherName>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.4.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
