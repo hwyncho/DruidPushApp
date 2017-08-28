@@ -46,9 +46,9 @@
             this.tableLayoutPanel_Main = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox_Subjects = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel_Subjects = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButton_Advanced = new System.Windows.Forms.RadioButton();
             this.radioButton_Discrete = new System.Windows.Forms.RadioButton();
-            this.radioButton_Datastructure = new System.Windows.Forms.RadioButton();
+            this.radioButton_Datastructure1 = new System.Windows.Forms.RadioButton();
+            this.radioButton_Datastructure2 = new System.Windows.Forms.RadioButton();
             this.radioButton_Algorithm = new System.Windows.Forms.RadioButton();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
@@ -125,16 +125,16 @@
             this.ToolStripMenuItem_Interval_1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ToolStripMenuItem_Interval_1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ToolStripMenuItem_Interval_1.Name = "ToolStripMenuItem_Interval_1";
-            this.ToolStripMenuItem_Interval_1.Size = new System.Drawing.Size(109, 22);
-            this.ToolStripMenuItem_Interval_1.Text = "1초(&A)";
+            this.ToolStripMenuItem_Interval_1.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Interval_1.Text = "1분(&A)";
             this.ToolStripMenuItem_Interval_1.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_1_Click);
             // 
             // ToolStripMenuItem_Interval_3
             // 
             this.ToolStripMenuItem_Interval_3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ToolStripMenuItem_Interval_3.Name = "ToolStripMenuItem_Interval_3";
-            this.ToolStripMenuItem_Interval_3.Size = new System.Drawing.Size(109, 22);
-            this.ToolStripMenuItem_Interval_3.Text = "3초(&B)";
+            this.ToolStripMenuItem_Interval_3.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Interval_3.Text = "3분(&B)";
             this.ToolStripMenuItem_Interval_3.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_3_Click);
             // 
             // ToolStripMenuItem_Interval_5
@@ -142,14 +142,14 @@
             this.ToolStripMenuItem_Interval_5.CheckOnClick = true;
             this.ToolStripMenuItem_Interval_5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ToolStripMenuItem_Interval_5.Name = "ToolStripMenuItem_Interval_5";
-            this.ToolStripMenuItem_Interval_5.Size = new System.Drawing.Size(109, 22);
-            this.ToolStripMenuItem_Interval_5.Text = "5초(&C)";
+            this.ToolStripMenuItem_Interval_5.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Interval_5.Text = "5분(&C)";
             this.ToolStripMenuItem_Interval_5.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_5_Click);
             // 
             // ToolStripMenuItem_Quit
             // 
             this.ToolStripMenuItem_Quit.Name = "ToolStripMenuItem_Quit";
-            this.ToolStripMenuItem_Quit.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Quit.Size = new System.Drawing.Size(133, 22);
             this.ToolStripMenuItem_Quit.Text = "종료(&Q)";
             this.ToolStripMenuItem_Quit.Click += new System.EventHandler(this.ToolStripMenuItem_Quit_Click);
             // 
@@ -200,9 +200,9 @@
             this.tableLayoutPanel_Subjects.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel_Subjects.ColumnCount = 1;
             this.tableLayoutPanel_Subjects.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel_Subjects.Controls.Add(this.radioButton_Advanced, 0, 0);
-            this.tableLayoutPanel_Subjects.Controls.Add(this.radioButton_Discrete, 0, 1);
-            this.tableLayoutPanel_Subjects.Controls.Add(this.radioButton_Datastructure, 0, 2);
+            this.tableLayoutPanel_Subjects.Controls.Add(this.radioButton_Discrete, 0, 0);
+            this.tableLayoutPanel_Subjects.Controls.Add(this.radioButton_Datastructure1, 0, 1);
+            this.tableLayoutPanel_Subjects.Controls.Add(this.radioButton_Datastructure2, 0, 2);
             this.tableLayoutPanel_Subjects.Controls.Add(this.radioButton_Algorithm, 0, 3);
             this.tableLayoutPanel_Subjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel_Subjects.Location = new System.Drawing.Point(3, 19);
@@ -216,53 +216,53 @@
             this.tableLayoutPanel_Subjects.Size = new System.Drawing.Size(268, 238);
             this.tableLayoutPanel_Subjects.TabIndex = 0;
             // 
-            // radioButton_Advanced
-            // 
-            this.radioButton_Advanced.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.radioButton_Advanced.AutoSize = true;
-            this.radioButton_Advanced.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.radioButton_Advanced.Location = new System.Drawing.Point(86, 15);
-            this.radioButton_Advanced.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton_Advanced.Name = "radioButton_Advanced";
-            this.radioButton_Advanced.Size = new System.Drawing.Size(95, 32);
-            this.radioButton_Advanced.TabIndex = 0;
-            this.radioButton_Advanced.TabStop = true;
-            this.radioButton_Advanced.Text = "고급프로그래밍";
-            this.radioButton_Advanced.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton_Advanced.UseVisualStyleBackColor = true;
-            this.radioButton_Advanced.Click += new System.EventHandler(this.radioButton_Click);
-            // 
             // radioButton_Discrete
             // 
             this.radioButton_Discrete.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radioButton_Discrete.AutoSize = true;
             this.radioButton_Discrete.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.radioButton_Discrete.Location = new System.Drawing.Point(104, 73);
+            this.radioButton_Discrete.Location = new System.Drawing.Point(104, 15);
             this.radioButton_Discrete.Margin = new System.Windows.Forms.Padding(0);
             this.radioButton_Discrete.Name = "radioButton_Discrete";
             this.radioButton_Discrete.Size = new System.Drawing.Size(59, 32);
-            this.radioButton_Discrete.TabIndex = 1;
+            this.radioButton_Discrete.TabIndex = 0;
             this.radioButton_Discrete.TabStop = true;
             this.radioButton_Discrete.Text = "이산구조";
             this.radioButton_Discrete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton_Discrete.UseVisualStyleBackColor = true;
             this.radioButton_Discrete.Click += new System.EventHandler(this.radioButton_Click);
             // 
-            // radioButton_Datastructure
+            // radioButton_Datastructure1
             // 
-            this.radioButton_Datastructure.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.radioButton_Datastructure.AutoSize = true;
-            this.radioButton_Datastructure.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.radioButton_Datastructure.Location = new System.Drawing.Point(104, 131);
-            this.radioButton_Datastructure.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton_Datastructure.Name = "radioButton_Datastructure";
-            this.radioButton_Datastructure.Size = new System.Drawing.Size(59, 32);
-            this.radioButton_Datastructure.TabIndex = 2;
-            this.radioButton_Datastructure.TabStop = true;
-            this.radioButton_Datastructure.Text = "자료구조";
-            this.radioButton_Datastructure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton_Datastructure.UseVisualStyleBackColor = true;
-            this.radioButton_Datastructure.Click += new System.EventHandler(this.radioButton_Click);
+            this.radioButton_Datastructure1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.radioButton_Datastructure1.AutoSize = true;
+            this.radioButton_Datastructure1.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.radioButton_Datastructure1.Location = new System.Drawing.Point(77, 73);
+            this.radioButton_Datastructure1.Margin = new System.Windows.Forms.Padding(0);
+            this.radioButton_Datastructure1.Name = "radioButton_Datastructure1";
+            this.radioButton_Datastructure1.Size = new System.Drawing.Size(114, 32);
+            this.radioButton_Datastructure1.TabIndex = 1;
+            this.radioButton_Datastructure1.TabStop = true;
+            this.radioButton_Datastructure1.Text = "자료구조 (화5/목6)";
+            this.radioButton_Datastructure1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton_Datastructure1.UseVisualStyleBackColor = true;
+            this.radioButton_Datastructure1.Click += new System.EventHandler(this.radioButton_Click);
+            // 
+            // radioButton_Datastructure2
+            // 
+            this.radioButton_Datastructure2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.radioButton_Datastructure2.AutoSize = true;
+            this.radioButton_Datastructure2.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.radioButton_Datastructure2.Location = new System.Drawing.Point(77, 131);
+            this.radioButton_Datastructure2.Margin = new System.Windows.Forms.Padding(0);
+            this.radioButton_Datastructure2.Name = "radioButton_Datastructure2";
+            this.radioButton_Datastructure2.Size = new System.Drawing.Size(114, 32);
+            this.radioButton_Datastructure2.TabIndex = 2;
+            this.radioButton_Datastructure2.TabStop = true;
+            this.radioButton_Datastructure2.Text = "자료구조 (화6/목5)";
+            this.radioButton_Datastructure2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton_Datastructure2.UseVisualStyleBackColor = true;
+            this.radioButton_Datastructure2.Click += new System.EventHandler(this.radioButton_Click);
             // 
             // radioButton_Algorithm
             // 
@@ -349,9 +349,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Main;
         private System.Windows.Forms.GroupBox groupBox_Subjects;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Subjects;
-        private System.Windows.Forms.RadioButton radioButton_Advanced;
         private System.Windows.Forms.RadioButton radioButton_Discrete;
-        private System.Windows.Forms.RadioButton radioButton_Datastructure;
+        private System.Windows.Forms.RadioButton radioButton_Datastructure1;
+        private System.Windows.Forms.RadioButton radioButton_Datastructure2;
         private System.Windows.Forms.RadioButton radioButton_Algorithm;
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_OK;
