@@ -33,13 +33,13 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.timer_Parse = new System.Windows.Forms.Timer(this.components);
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem_Setting = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Interval = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_Interval_1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_Interval_3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_Interval_5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Interval_1S = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Interval_3M = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Interval_5M = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Quit = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Help = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Info = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +52,7 @@
             this.radioButton_Algorithm = new System.Windows.Forms.RadioButton();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
+            this.timer_Notify = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel_Main.SuspendLayout();
@@ -82,10 +83,10 @@
             this.ToolStripMenuItem_Exit.Text = "종료";
             this.ToolStripMenuItem_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_Exit_Click);
             // 
-            // timer
+            // timer_Parse
             // 
-            this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timer_Parse.Interval = 1000;
+            this.timer_Parse.Tick += new System.EventHandler(this.timer_Parse_Tick);
             // 
             // menuStrip
             // 
@@ -111,45 +112,45 @@
             // ToolStripMenuItem_Interval
             // 
             this.ToolStripMenuItem_Interval.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItem_Interval_1,
-            this.ToolStripMenuItem_Interval_3,
-            this.ToolStripMenuItem_Interval_5});
+            this.ToolStripMenuItem_Interval_1S,
+            this.ToolStripMenuItem_Interval_3M,
+            this.ToolStripMenuItem_Interval_5M});
             this.ToolStripMenuItem_Interval.Name = "ToolStripMenuItem_Interval";
             this.ToolStripMenuItem_Interval.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_Interval.Text = "알림주기(&I)";
             // 
-            // ToolStripMenuItem_Interval_1
+            // ToolStripMenuItem_Interval_1S
             // 
-            this.ToolStripMenuItem_Interval_1.Checked = true;
-            this.ToolStripMenuItem_Interval_1.CheckOnClick = true;
-            this.ToolStripMenuItem_Interval_1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ToolStripMenuItem_Interval_1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ToolStripMenuItem_Interval_1.Name = "ToolStripMenuItem_Interval_1";
-            this.ToolStripMenuItem_Interval_1.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItem_Interval_1.Text = "1분(&A)";
-            this.ToolStripMenuItem_Interval_1.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_1_Click);
+            this.ToolStripMenuItem_Interval_1S.Checked = true;
+            this.ToolStripMenuItem_Interval_1S.CheckOnClick = true;
+            this.ToolStripMenuItem_Interval_1S.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ToolStripMenuItem_Interval_1S.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ToolStripMenuItem_Interval_1S.Name = "ToolStripMenuItem_Interval_1S";
+            this.ToolStripMenuItem_Interval_1S.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Interval_1S.Text = "실시간(&A)";
+            this.ToolStripMenuItem_Interval_1S.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_1_Click);
             // 
-            // ToolStripMenuItem_Interval_3
+            // ToolStripMenuItem_Interval_3M
             // 
-            this.ToolStripMenuItem_Interval_3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ToolStripMenuItem_Interval_3.Name = "ToolStripMenuItem_Interval_3";
-            this.ToolStripMenuItem_Interval_3.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItem_Interval_3.Text = "3분(&B)";
-            this.ToolStripMenuItem_Interval_3.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_3_Click);
+            this.ToolStripMenuItem_Interval_3M.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ToolStripMenuItem_Interval_3M.Name = "ToolStripMenuItem_Interval_3M";
+            this.ToolStripMenuItem_Interval_3M.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Interval_3M.Text = "3분(&B)";
+            this.ToolStripMenuItem_Interval_3M.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_3_Click);
             // 
-            // ToolStripMenuItem_Interval_5
+            // ToolStripMenuItem_Interval_5M
             // 
-            this.ToolStripMenuItem_Interval_5.CheckOnClick = true;
-            this.ToolStripMenuItem_Interval_5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ToolStripMenuItem_Interval_5.Name = "ToolStripMenuItem_Interval_5";
-            this.ToolStripMenuItem_Interval_5.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItem_Interval_5.Text = "5분(&C)";
-            this.ToolStripMenuItem_Interval_5.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_5_Click);
+            this.ToolStripMenuItem_Interval_5M.CheckOnClick = true;
+            this.ToolStripMenuItem_Interval_5M.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ToolStripMenuItem_Interval_5M.Name = "ToolStripMenuItem_Interval_5M";
+            this.ToolStripMenuItem_Interval_5M.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Interval_5M.Text = "5분(&C)";
+            this.ToolStripMenuItem_Interval_5M.Click += new System.EventHandler(this.ToolStripMenuItem_Interval_5_Click);
             // 
             // ToolStripMenuItem_Quit
             // 
             this.ToolStripMenuItem_Quit.Name = "ToolStripMenuItem_Quit";
-            this.ToolStripMenuItem_Quit.Size = new System.Drawing.Size(133, 22);
+            this.ToolStripMenuItem_Quit.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_Quit.Text = "종료(&Q)";
             this.ToolStripMenuItem_Quit.Click += new System.EventHandler(this.ToolStripMenuItem_Quit_Click);
             // 
@@ -304,6 +305,11 @@
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
+            // timer_Notify
+            // 
+            this.timer_Notify.Interval = 1000;
+            this.timer_Notify.Tick += new System.EventHandler(this.timer_Notify_Tick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -339,7 +345,7 @@
 		private System.Windows.Forms.NotifyIcon notifyIcon;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Exit;
-		private System.Windows.Forms.Timer timer;
+		private System.Windows.Forms.Timer timer_Parse;
 		private System.Windows.Forms.MenuStrip menuStrip;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Setting;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Interval;
@@ -355,9 +361,10 @@
         private System.Windows.Forms.RadioButton radioButton_Algorithm;
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_OK;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Interval_1;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Interval_3;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Interval_5;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Interval_1S;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Interval_3M;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Interval_5M;
+        private System.Windows.Forms.Timer timer_Notify;
     }
 }
 

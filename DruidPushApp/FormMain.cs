@@ -8,9 +8,9 @@ namespace DruidPushApp
 {
     public partial class FormMain : System.Windows.Forms.Form
     {
-        private const int INTERVAL_1 = 1000 * 60;       // 알림주기 1분
-        private const int INTERVAL_3 = 1000 * 180;      // 알림주기 3분
-        private const int INTERVAL_5 = 1000 * 300;      // 알림주기 5분
+        private const int INTERVAL_1S = 1100;       // 알림주기 1분
+        private const int INTERVAL_3M = 1000 * 180;      // 알림주기 3분
+        private const int INTERVAL_5M = 1000 * 300;      // 알림주기 5분
 
         private const String URL = "http://druid.kw.ac.kr/Board/";      // 게시판 URL
         private const String DISCRETE = "Discrete";                     // 이산구조
@@ -18,12 +18,13 @@ namespace DruidPushApp
         private const String DATASTRUCTURE2 = "DS";                     // 자료구조 (화6/목5)
         private const String ALGORITHM = "Algorithm";                   // 알고리즘
 
-        private int interval = 1000 * 60;       // 선택한 알림 주기를 저장 (초기값 : 1분)
+        private int interval = 1000;       // 선택한 알림 주기를 저장 (초기값 : 1초)
 
         private String subject = "";        // 선택한 과목을 저장
 
-        private int oldCount = 0;       // 이전 게시물 갯수 저장
-        private int newCount = 0;       // 새 게시물 갯수 저장
+        private int count = 0;
+        private int oldNumber = 0;      // 이전 게시물 번호 저장
+        private int newNumber = 0;      // 새 게시물 번호 저장
 
         public FormMain()
         {
@@ -35,31 +36,31 @@ namespace DruidPushApp
         /* 설정 > 알림주기 > 1분 */
         private void ToolStripMenuItem_Interval_1_Click(object sender, EventArgs e)
         {
-            this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Checked;
-            this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
-            this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_1S.CheckState = CheckState.Checked;
+            this.ToolStripMenuItem_Interval_3M.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_5M.CheckState = CheckState.Unchecked;
 
-            this.interval = INTERVAL_1;
+            this.interval = INTERVAL_1S;
         }
 
         /* 설정 > 알림주기 > 3분 */
         private void ToolStripMenuItem_Interval_3_Click(object sender, EventArgs e)
         {
-            this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
-            this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Checked;
-            this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_1S.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_3M.CheckState = CheckState.Checked;
+            this.ToolStripMenuItem_Interval_5M.CheckState = CheckState.Unchecked;
 
-            this.interval = INTERVAL_3;
+            this.interval = INTERVAL_3M;
         }
 
         /* 설정 > 알림주기 > 5분 */
         private void ToolStripMenuItem_Interval_5_Click(object sender, EventArgs e)
         {
-            this.ToolStripMenuItem_Interval_1.CheckState = CheckState.Unchecked;
-            this.ToolStripMenuItem_Interval_3.CheckState = CheckState.Unchecked;
-            this.ToolStripMenuItem_Interval_5.CheckState = CheckState.Checked;
+            this.ToolStripMenuItem_Interval_1S.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_3M.CheckState = CheckState.Unchecked;
+            this.ToolStripMenuItem_Interval_5M.CheckState = CheckState.Checked;
 
-            this.interval = INTERVAL_5;
+            this.interval = INTERVAL_5M;
         }
 
         /* 설정 > 종료 */
@@ -83,8 +84,8 @@ namespace DruidPushApp
             }
             else
             {
-                timer.Interval = this.interval;
-                this.oldCount = MyGetCount();
+                this.timer_Notify.Interval = this.interval;
+                this.oldNumber = MyGetCount();
 
                 MyTrayMode(true);
             }
@@ -102,25 +103,35 @@ namespace DruidPushApp
             this.MyTrayMode(false);
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void timer_Parse_Tick(object sender, EventArgs e)
         {
             new Thread(new ThreadStart(MyParse)).Start();
         }
 
+        private void timer_Notify_Tick(object sender, EventArgs e)
+        {
+            if (this.count > 0)
+            {
+                String a = String.Format("{0} 개의 새 질문이 있습니다.", this.count);
+                new Thread(() => MyPush("DruidPushApp", a)).Start();
+                this.count = 0;
+            }
+        }
+
         private void notifyIcon_BalloonTipClicked(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(URL + subject + "/" + this.newCount);
+            System.Diagnostics.Process.Start(URL + subject + "/" + this.newNumber);
         }
 
         /* 변수 초기화 함수 */
         private void MySetVariable()
         {
-            this.interval = 1000 * 60;
+            this.interval = 1000;
 
             this.subject = "";
 
-            this.oldCount = 0;
-            this.newCount = 0;
+            this.oldNumber = 0;
+            this.newNumber = 0;
         }
 
         private void MyTrayMode(Boolean mode)
@@ -138,16 +149,22 @@ namespace DruidPushApp
                     this.notifyIcon.ShowBalloonTip(3000);
 
                     // Timer 활성화
-                    this.timer.Interval = this.interval;
-                    this.timer.Enabled = true;
-                    this.timer.Start();
+                    this.timer_Parse.Enabled = true;
+                    this.timer_Parse.Start();
+
+                    this.timer_Notify.Interval = this.interval;
+                    this.timer_Notify.Enabled = true;
+                    this.timer_Notify.Start();
 
                     break;
 
                 case false:
                     // Timer 비활성화
-                    this.timer.Stop();
-                    this.timer.Enabled = false;
+                    this.timer_Notify.Stop();
+                    this.timer_Notify.Enabled = false;
+
+                    this.timer_Parse.Stop();
+                    this.timer_Parse.Enabled = false;
 
                     this.Visible = true;
                     this.WindowState = FormWindowState.Normal;
@@ -204,8 +221,8 @@ namespace DruidPushApp
             try
             {
                 htmlDocument = htmlWeb.Load(URL + "Contents/" + subject);
-                htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr//th").First();
-
+                htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr[2]//th").First();
+                Console.WriteLine(htmlNode.InnerHtml);
                 return Convert.ToInt32(htmlNode.InnerHtml);
             }
             catch (Exception e)
@@ -220,24 +237,30 @@ namespace DruidPushApp
             HtmlAgilityPack.HtmlWeb htmlWeb = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
             HtmlAgilityPack.HtmlNode htmlNode;
-            HtmlAgilityPack.HtmlNode htmlNode_Number;
-            HtmlAgilityPack.HtmlNode htmlNode_Title;
-            HtmlAgilityPack.HtmlNode htmlNode_Writer;
+            //HtmlAgilityPack.HtmlNode htmlNode_Number;
+            //HtmlAgilityPack.HtmlNode htmlNode_Title;
+            //HtmlAgilityPack.HtmlNode htmlNode_Writer;
 
             try
             {
                 htmlDocument = htmlWeb.Load(URL + "Contents/" + subject);
-                htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr").First();
-                htmlNode_Number = htmlNode.SelectNodes(".//th").First();
-                htmlNode_Title = htmlNode.SelectNodes(".//td//a[@class='detail-title']").First();
-                htmlNode_Writer = htmlNode.SelectNodes(".//td[@class='text-center detail-username']").First();
+                /*
+                htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr[2]").First();
+                htmlNode_Number = htmlNode.SelectSingleNode(".//th");
+                htmlNode_Title = htmlNode.SelectSingleNode(".//td//a[@class='detail-title']");
+                htmlNode_Writer = htmlNode.SelectSingleNode(".//td[@class='text-center detail-username']");
 
-                this.newCount = Convert.ToInt32(htmlNode_Number.InnerHtml);
+                this.newNumber = Convert.ToInt32(htmlNode_Number.InnerHtml);
+                */
 
-                if (this.newCount > this.oldCount)
+                htmlNode = htmlDocument.DocumentNode.SelectNodes("//tbody//tr[2]//th").First();
+                Console.WriteLine(htmlNode.InnerHtml);
+                this.newNumber = Convert.ToInt32(htmlNode.InnerHtml);
+
+                if (this.oldNumber < this.newNumber)
                 {
-                    new Thread(() => MyPush(htmlNode_Writer.InnerHtml, htmlNode_Title.InnerHtml)).Start();
-                    this.oldCount = this.newCount;
+                    this.count += 1;
+                    this.oldNumber = this.newNumber;
                 }
             }
             catch (Exception e)
@@ -249,8 +272,7 @@ namespace DruidPushApp
         /* 알림 표시 함수 */
         private void MyPush(String writer, String title)
         {
-            String url = URL + subject + "/" + this.newCount;
-
+            String url = URL + subject + "/" + this.newNumber;
 
             FormBackground formBackground = new FormBackground();
 
